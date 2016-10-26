@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.972,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.425,D:\RAD_Studio-Projects\FootGame\UnitConnect.cpp=D:\RAD_Studio-Projects\FootGame\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.263,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.264,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.241,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.194,D:\RAD_Studio-Projects\FootGame\FootGame.cbproj=D:\RAD_Studio-Projects\FootGame\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.859,D:\RAD_Studio-Projects\FootGame\UnitMain.fmx=D:\RAD_Studio-Projects\FootGame\Unit1.fmx</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.425,D:\RAD_Studio-Projects\FootGame\UnitConnect.fmx=D:\RAD_Studio-Projects\FootGame\Unit1.fmx</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.859,D:\RAD_Studio-Projects\FootGame\UnitMain.h=D:\RAD_Studio-Projects\FootGame\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.506,=D:\RAD_Studio-Projects\FootGame\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.606,C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.fmx=D:\BSUIR\Course\Unit1.fmx</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.893,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.300,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.021,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.715,C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1PCH1.h=D:\BSUIR\Course\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.253,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.183,D:\RAD_Studio-Projects\FootGame\FootGamePCH1.h=D:\RAD_Studio-Projects\FootGame\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.859,D:\RAD_Studio-Projects\FootGame\UnitMain.cpp=D:\RAD_Studio-Projects\FootGame\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.606,C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.cpp=D:\BSUIR\Course\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.742,C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1.cbproj=D:\BSUIR\Course\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.606,C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.h=D:\BSUIR\Course\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.425,D:\RAD_Studio-Projects\FootGame\UnitConnect.h=D:\RAD_Studio-Projects\FootGame\Unit1.h</Transaction>
+  </Transactions>
+</BorlandProject>

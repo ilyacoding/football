@@ -1,0 +1,11 @@
+inherited BallGame_Surface: TBallGame_Surface
+  ClientHeight = 1920
+  ClientWidth = 1080
+  DesignerMasterStyle = 0
+  inherited ImageUser: TImage
+    inherited Ball: TCircle
+      RotationCenter.X = 0.000000000000000000
+      Stroke.Thickness = 0.200000002980232200
+    end
+  end
+end
