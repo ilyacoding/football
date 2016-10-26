@@ -1,0 +1,249 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#pragma hdrstop
+
+#include "Unit1.h"
+#include "math.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.fmx"
+#pragma resource ("*.Surface.fmx", _PLAT_MSWINDOWS)
+
+TBallGame *BallGame;
+int mouseX, mouseY, NPlayers[1], moveDeg;
+bool Collision = true;
+const double pi = 3.14159265358979323;
+//TCircle* CircleUser;
+TImage* ImgPlayer;
+TImage* TestPlayer;
+TImage *Team1[4], *Team2[4];
+//TRectangle* RectUser;
+// Ball
+struct BallStructure {
+	int ownerN, moveDeg;
+	float moveV, moveA;
+	char owner;
+} TBall;
+
+//---------------------------------------------------------------------------
+__fastcall TBallGame::TBallGame(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+// Own
+bool __fastcall TBallGame::AddPlayer(int TeamNo)
+{
+	if (TeamNo == 1) {
+		if (NPlayers[0] >= 4)
+			return false;
+		NPlayers[0]++;
+		TImage *NewPlayer = new TImage(this);
+		NewPlayer->Parent = ImageUser;
+		NewPlayer->Name = "Image" + AnsiString(NPlayers[0]) + "Team1";
+		NewPlayer->Height = 64;
+		NewPlayer->Width = 64;
+		NewPlayer->Position->X = 0;
+		NewPlayer->Position->Y = 0;
+		NewPlayer->Bitmap->LoadFromFile("img/player.png");
+		Team1[NPlayers[0]] = NewPlayer;
+	} else if (TeamNo == 2) {
+		if (NPlayers[0] >= 4)
+			return false;
+		NPlayers[1]++;
+		TImage *NewPlayer = new TImage(this);
+		NewPlayer->Parent = ImageUser;
+		NewPlayer->Name = "Image" + AnsiString(NPlayers[0]) + "Team2";
+		NewPlayer->Height = 64;
+		NewPlayer->Width = 64;
+		NewPlayer->Position->X = ImageUser->Width;
+		NewPlayer->Position->Y = 0;
+		NewPlayer->Bitmap->LoadFromFile("img/player.png");
+		Team2[NPlayers[1]] = NewPlayer;
+	}
+	return false;
+}
+
+int CalcDeg(float FromX, float FromY, float ToX, float ToY) {
+	if ((ToX - (FromX) > 0) && (ToY - (FromY) > 0)) {
+		// X+ Y+
+		return ceil(atan(fabs(ToX - (FromX))/fabs(ToY - (FromY))) * 180 / pi) + 270;
+		//Label2->Text = "X+ Y+";
+	} else if ((ToX - (FromX) < 0) && (ToY - (FromY) > 0)) {
+		// X- Y+
+		return ceil(atan(fabs(ToY - (FromY))/fabs(ToX - (FromX))) * 180 / pi) + 180;
+		//Label2->Text = "X- Y+";
+	} else if ((ToX - (FromX) > 0) && (ToY - (FromY) < 0)) {
+		// X+ Y-
+		return ceil(atan(fabs(ToY - (FromY))/fabs(ToX - (FromX))) * 180 / pi);
+		//Label2->Text = "X+ Y-";
+	} else if ((ToX - (FromX) < 0) && (ToY - (FromY) < 0)) {
+		// X- Y-
+		return 180 - ceil(atan(fabs(ToY - (FromY))/fabs(ToX - (FromX))) * 180 / pi);
+		//Label2->Text = "X- Y-";
+	} else {
+		return 0;
+    }
+}
+// Own
+
+//---------------------------------------------------------------------------
+void __fastcall TBallGame::TimerMoveUserTimer(TObject *Sender)
+{
+	for (int i = 0; i <= 2; i++)
+	{
+		moveDeg = CalcDeg(ImgPlayer->Position->X + ImgPlayer->Width/2, ImgPlayer->Position->Y + ImgPlayer->Height/2, mouseX, mouseY);
+		/*if ((mouseX - (ImgPlayer->Position->X + ImgPlayer->Width/2) > 0) && (mouseY - (ImgPlayer->Position->Y + ImgPlayer->Height/2) > 0)) {
+			// X+ Y+
+			moveDeg = ceil(atan(fabs(mouseX - (ImgPlayer->Position->X + ImgPlayer->Width/2))/fabs(mouseY - (ImgPlayer->Position->Y + ImgPlayer->Height/2))) * 180 / pi) + 270;
+			Label2->Text = "X+ Y+";
+		} else if ((mouseX - (ImgPlayer->Position->X + ImgPlayer->Width/2) < 0) && (mouseY - (ImgPlayer->Position->Y + ImgPlayer->Height/2) > 0)) {
+			// X- Y+
+			moveDeg = ceil(atan(fabs(mouseY - (ImgPlayer->Position->Y + ImgPlayer->Height/2))/fabs(mouseX - (ImgPlayer->Position->X + ImgPlayer->Width/2))) * 180 / pi) + 180;
+			Label2->Text = "X- Y+";
+		} else if ((mouseX - (ImgPlayer->Position->X + ImgPlayer->Width/2) > 0) && (mouseY - (ImgPlayer->Position->Y + ImgPlayer->Height/2) < 0)) {
+			// X+ Y-
+			moveDeg = ceil(atan(fabs(mouseY - (ImgPlayer->Position->Y + ImgPlayer->Height/2))/fabs(mouseX - (ImgPlayer->Position->X + ImgPlayer->Width/2))) * 180 / pi);
+			Label2->Text = "X+ Y-";
+		} else if ((mouseX - (ImgPlayer->Position->X + ImgPlayer->Width/2) < 0) && (mouseY - (ImgPlayer->Position->Y + ImgPlayer->Height/2) < 0)) {
+			// X- Y-
+			moveDeg = 180 - ceil(atan(fabs(mouseY - (ImgPlayer->Position->Y + ImgPlayer->Height/2))/fabs(mouseX - (ImgPlayer->Position->X + ImgPlayer->Width/2))) * 180 / pi);
+			Label2->Text = "X- Y-";
+		}    */
+		Label1->Text = IntToStr(moveDeg);
+		if (((cos(int(moveDeg) * pi / 180) * 1) + ImgPlayer->Position->X < 2 +ImageUser->Width) && ((cos(int(moveDeg) * pi / 180) * 1) + ImgPlayer->Position->X > (1-ImgPlayer->Width/2)))
+		{
+			ImgPlayer->Position->X += (cos(int(moveDeg) * pi / 180) * 1);
+		}
+		if ((ImgPlayer->Position->Y - (sin(int(moveDeg) * pi / 180) * 1) < 2 + ImageUser->Height) && (ImgPlayer->Position->Y - (sin(int(moveDeg) * pi / 180) * 1) > (1-ImgPlayer->Width/2)))
+		{
+			ImgPlayer->Position->Y -= (sin(int(moveDeg) * pi / 180) * 1);
+		}
+		ImageUser->Repaint();
+	}
+}
+
+//---------------------------------------------------------------------------
+
+void __fastcall TBallGame::ImageUserMouseMove(TObject *Sender, TShiftState Shift, float X,
+          float Y)
+{
+	mouseX = X;
+	mouseY = Y;
+	Label3->Text = IntToStr(mouseX);
+	Label4->Text = IntToStr(mouseY);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TBallGame::ImageUserMouseLeave(TObject *Sender)
+{
+	mouseX = ImgPlayer->Position->X;
+	mouseY = ImgPlayer->Position->Y;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TBallGame::FormCreate(TObject *Sender)
+{
+	ImageUser->Bitmap->LoadFromFile("img/bg.png");
+	NPlayers[0] = 0;
+	NPlayers[1] = 0;
+	for (int i = 1; i <= 4; i++)
+		AddPlayer(1);
+    AddPlayer(2);
+	ImgPlayer = Team1[1];
+	TBall.ownerN = 0;
+	TBall.owner = 'n';
+	TBall.moveV = 5;
+	TBall.moveA = 0.002;
+	TBall.moveDeg = 170;
+	FloatAnimationX->AniFrameRate = 100;
+}
+
+//---------------------------------------------------------------------------
+
+void __fastcall TBallGame::TimerMoveBallTimer(TObject *Sender)
+{
+    moveDeg += 1;
+	if (TBall.moveV > 0)
+	{
+		for (int i = 0; i < (TBall.moveV - TBall.moveA); i++)
+		{
+			if (!((cos(int(TBall.moveDeg) * pi / 180) * 1) + Ball->Position->X + Ball->Width/2 < ImageUser->Width) || !((cos(int(TBall.moveDeg) * pi / 180) * 1) + Ball->Position->X + Ball->Width/2 > 0))
+			{
+				// Отражение на 180
+				TBall.moveDeg = 180 - TBall.moveDeg;
+				TBall.moveV *= 0.85;
+			}
+			Ball->Position->X += (cos(int(TBall.moveDeg) * pi / 180) * 1);
+			Ball->RotationAngle += (cos(int(TBall.moveDeg) * pi / 180) * 1) * 2;
+			if (!(Ball->Position->Y + Ball->Height/2 - (sin(int(TBall.moveDeg) * pi / 180) * 1) < ImageUser->Height) || !(Ball->Position->Y + Ball->Height/2 - (sin(int(TBall.moveDeg) * pi / 180) * 1) > 0))
+			{
+				// Отражение на 180
+				TBall.moveDeg = (180 - TBall.moveDeg) * 2 + TBall.moveDeg;
+				TBall.moveV *= 0.85;
+			}
+			Ball->Position->Y -= (sin(int(TBall.moveDeg) * pi / 180) * 1);
+			//FloatAnimationX->StartValue = FloatAnimationX->StopValue;
+			//FloatAnimationY->StartValue = FloatAnimationY->StopValue;
+			//FloatAnimationX->StopValue = fabs(Ball->Position->X + (cos(int(TBall.moveDeg) * pi / 180) * 1));
+			//FloatAnimationY->StopValue = fabs(Ball->Position->Y - (sin(int(TBall.moveDeg) * pi / 180) * 1));
+			//FloatAnimationX->Start();
+			//FloatAnimationY->Start();
+			//ImageUser->Repaint();
+			//ImageUser->UpdateEffects();
+			//Label5->Text = FloatToStr(Ball->Position->X);
+			//Label6->Text = FloatToStr(Ball->Position->Y);
+			TBall.moveV -= TBall.moveA;
+		}
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TBallGame::BallMouseMove(TObject *Sender, TShiftState Shift, float X,
+		  float Y)
+{
+	mouseX = Ball->Position->X + X;
+	mouseY = Ball->Position->Y + Y;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TBallGame::Button1Click(TObject *Sender)
+{
+	AddPlayer(1);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TBallGame::FormKeyDown(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
+          TShiftState Shift)
+{
+	if (/*(!Collision) && */(KeyChar == 'w') && (sqrt(((Ball->Height/2 + Ball->Position->Y) - (ImgPlayer->Height/2 + ImgPlayer->Position->Y))*((Ball->Height/2 + Ball->Position->Y) - (ImgPlayer->Height/2 + ImgPlayer->Position->Y)) + ((Ball->Width/2 + Ball->Position->X) - (ImgPlayer->Width/2 + ImgPlayer->Position->X))*((Ball->Width/2 + Ball->Position->X) - (ImgPlayer->Width/2 + ImgPlayer->Position->X))) <= ImgPlayer->Width)) {
+		TBall.moveV += 5;
+		TBall.moveDeg = CalcDeg(ImgPlayer->Width/2 + ImgPlayer->Position->X, ImgPlayer->Height/2 + ImgPlayer->Position->Y, Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y);
+		//Collision = true;
+	} else if (isdigit(KeyChar)) {
+
+		ImgPlayer = Team1[KeyChar-'0'];
+	}
+	Label7->Text = KeyChar;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TBallGame::Panel1MouseMove(TObject *Sender, TShiftState Shift, float X,
+		  float Y)
+{
+	mouseX = X;
+	mouseY = Y;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TBallGame::TimerStopBallTimer(TObject *Sender)
+{
+	for (int i = 1; i <= 4; i++) {
+		TestPlayer = Team1[i];
+		if ((Collision) && (sqrt(((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y))*((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y)) + ((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))*((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))) <= TestPlayer->Width/4)) {
+			TBall.moveV = 0;
+		}
+	}
+}
+//---------------------------------------------------------------------------
+
