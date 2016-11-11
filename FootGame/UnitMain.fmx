@@ -35,7 +35,7 @@ object BallGame: TBallGame
     Align = Client
     Cursor = crCross
     Size.Width = 1065.000000000000000000
-    Size.Height = 524.000000000000000000
+    Size.Height = 564.000000000000000000
     Size.PlatformDefault = False
     WrapMode = Stretch
     object Ball: TCircle
@@ -284,9 +284,27 @@ object BallGame: TBallGame
       Stroke.Kind = Bitmap
     end
   end
+  object PanelPlayArea: TPanel
+    Align = Client
+    Opacity = 0.000000000000000000
+    Size.Width = 1065.000000000000000000
+    Size.Height = 564.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'panelstyle'
+    TabOrder = 12
+    OnMouseMove = PanelPlayAreaMouseMove
+  end
+  object LabelFPS: TLabel
+    StyledSettings = [Family, Size]
+    Position.X = 8.000000000000000000
+    Position.Y = 32.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claCrimson
+    Text = '60 fps'
+  end
   object ToolBarTop: TToolBar
     Size.Width = 1065.000000000000000000
-    Size.Height = 65.000000000000000000
+    Size.Height = 25.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 11
     object MenuBar1: TMenuBar
@@ -304,94 +322,10 @@ object BallGame: TBallGame
         Text = #1057#1087#1088#1072#1074#1082#1072
       end
     end
-    object EditIP: TEdit
-      Touch.InteractiveGestures = [LongTap, DoubleTap]
-      TabOrder = 1
-      Text = '127.0.0.1'
-      Position.X = 8.000000000000000000
-      Position.Y = 40.000000000000000000
-    end
-    object LabelIP: TLabel
-      Position.X = 8.000000000000000000
-      Position.Y = 24.000000000000000000
-      Text = 'Host IP'
-    end
-    object ButtonConnect: TButton
-      Position.X = 112.000000000000000000
-      Position.Y = 40.000000000000000000
-      Size.Width = 57.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 3
-      Text = 'Connect'
-      OnClick = ButtonConnectClick
-    end
-    object ButtonHost: TButton
-      Position.X = 176.000000000000000000
-      Position.Y = 40.000000000000000000
-      Size.Width = 49.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 4
-      Text = 'Create'
-      OnClick = ButtonHostClick
-    end
-    object LabelStatus: TLabel
-      Position.X = 304.000000000000000000
-      Position.Y = 32.000000000000000000
-      Size.Width = 297.000000000000000000
-      Size.Height = 17.000000000000000000
-      Size.PlatformDefault = False
-      Text = 'Status: NOT RUNNING'
-    end
-    object AniIndicatorToolBar: TAniIndicator
-      Position.X = 256.000000000000000000
-      Position.Y = 32.000000000000000000
-      Size.Width = 26.000000000000000000
-      Size.Height = 26.000000000000000000
-      Size.PlatformDefault = False
-    end
-  end
-  object PanelPlayArea: TPanel
-    Align = Client
-    Opacity = 0.000000000000000000
-    Size.Width = 1065.000000000000000000
-    Size.Height = 524.000000000000000000
-    Size.PlatformDefault = False
-    StyleLookup = 'panelstyle'
-    TabOrder = 12
-    OnMouseMove = PanelPlayAreaMouseMove
   end
   object Label1: TLabel
     Position.X = 8.000000000000000000
-    Position.Y = 72.000000000000000000
+    Position.Y = 48.000000000000000000
     Text = 'Label1'
-  end
-  object IdTCPServer1: TIdTCPServer
-    Bindings = <>
-    DefaultPort = 0
-    MaxConnections = 10
-    OnExecute = IdTCPServer1Execute
-    Left = 840
-    Top = 104
-  end
-  object IdTCPClient1: TIdTCPClient
-    ConnectTimeout = 0
-    IPVersion = Id_IPv4
-    Port = 0
-    ReadTimeout = -1
-    Left = 920
-    Top = 104
-  end
-  object IdUDPServer1: TIdUDPServer
-    Bindings = <>
-    DefaultPort = 0
-    Left = 840
-    Top = 152
-  end
-  object IdUDPClient1: TIdUDPClient
-    Port = 0
-    Left = 920
-    Top = 152
   end
 end

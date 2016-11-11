@@ -43,22 +43,13 @@ __published:	// IDE-managed Components
 	TTimer *TimerMoveBall;
 	TPanel *PanelPlayArea;
 	TTimer *TimerStopBall;
+	TLabel *LabelFPS;
 	TToolBar *ToolBarTop;
-	TLabel *Label1;
-	TIdTCPServer *IdTCPServer1;
-	TIdTCPClient *IdTCPClient1;
-	TIdUDPServer *IdUDPServer1;
-	TIdUDPClient *IdUDPClient1;
 	TMenuBar *MenuBar1;
 	TMenuItem *MenuItemGame;
 	TMenuItem *MenuItemSettings;
 	TMenuItem *MenuItemInfo;
-	TEdit *EditIP;
-	TLabel *LabelIP;
-	TButton *ButtonConnect;
-	TButton *ButtonHost;
-	TLabel *LabelStatus;
-	TAniIndicator *AniIndicatorToolBar;
+	TLabel *Label1;
 	void __fastcall TimerMoveUserTimer(TObject *Sender); //
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall TimerMoveBallTimer(TObject *Sender);
@@ -66,9 +57,7 @@ __published:	// IDE-managed Components
           TShiftState Shift);
 	void __fastcall PanelPlayAreaMouseMove(TObject *Sender, TShiftState Shift, float X, float Y);
 	void __fastcall TimerStopBallTimer(TObject *Sender);
-	void __fastcall ButtonConnectClick(TObject *Sender);
-	void __fastcall ButtonHostClick(TObject *Sender);
-	void __fastcall IdTCPServer1Execute(TIdContext *AContext);
+   //	void __fastcall IdTCPServer1Execute(TIdContext *AContext);
 
 
 private:	// User declarations
