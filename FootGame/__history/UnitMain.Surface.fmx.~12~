@@ -1,0 +1,29 @@
+inherited BallGame_Surface: TBallGame_Surface
+  ClientHeight = 1920
+  ClientWidth = 1080
+  DesignerMasterStyle = 0
+  inherited ImageBackground: TImage
+    Size.Width = 1080.000000000000000000
+    Size.Height = 1855.000000000000000000
+    inherited Ball: TCircle
+      RotationCenter.X = 0.000000000000000000
+      Stroke.Thickness = 0.200000002980232200
+    end
+  end
+  inherited ToolBarTop: TToolBar
+    Size.Width = 1080.000000000000000000
+    inherited MenuBar1: TMenuBar
+      Size.Width = 1080.000000000000000000
+      inherited MenuItemGame: TMenuItem
+        Enabled = False
+      end
+    end
+    inherited AniIndicatorToolBar: TAniIndicator
+      Enabled = True
+    end
+  end
+  inherited PanelPlayArea: TPanel
+    Size.Width = 1080.000000000000000000
+    Size.Height = 1855.000000000000000000
+  end
+end

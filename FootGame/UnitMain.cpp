@@ -61,14 +61,6 @@ class TField
 		float CalcDistance(float FromX, float FromY, float ToX, float ToY);
 } Field;
 
-class TNetwork
-{
-	public:
-		int Team;
-        int ClientPort, ServerPort;
-		//char Status;
-} Net;
-
 int TTeam::GetAmount()
 {
 	int Amount = 0;
@@ -249,19 +241,19 @@ void __fastcall TBallGame::TimerMoveBallTimer(TObject *Sender)
 	{
 		for (int i = 0; i < (Field.Ball.Speed - Field.Ball.Accelerate); i++)
 		{
-			//if (!((cos(int(Field.Ball.Degree) * pi / 180) * 1) + Ball->Position->X + Ball->Width/2 < ImageUser->Width) || !((cos(int(TBall.moveDeg) * pi / 180) * 1) + Ball->Position->X + Ball->Width/2 > 0))
-			//{
+			if (!((cos(int(Field.Ball.Degree) * pi / 180) * 1) + Ball->Position->X + Ball->Width/2 < ImageBackground->Width) || !((cos(int(Field.Ball.Degree) * pi / 180) * 1) + Ball->Position->X + Ball->Width/2 > 0))
+			{
 				// Отражение на 180
-			   //	Field.Ball.Degree = 180 - Field.Ball.Degree;
-				//	Field.Ball.Speed *= 0.85;
-			//}
+				Field.Ball.Degree = 180 - Field.Ball.Degree;
+				Field.Ball.Speed *= 0.8;
+			}
 			Ball->Position->X += (cos(Field.Ball.Degree * pi / 180) * 1);
-			//if (!(Ball->Position->Y + Ball->Height/2 - (sin(int(TBall.moveDeg) * pi / 180) * 1) < ImageUser->Height) || !(Ball->Position->Y + Ball->Height/2 - (sin(int(TBall.moveDeg) * pi / 180) * 1) > 0))
-			//{
+			if (!(Ball->Position->Y + Ball->Height/2 - (sin(int(Field.Ball.Degree) * pi / 180) * 1) < ImageBackground->Height) || !(Ball->Position->Y + Ball->Height/2 - (sin(int(Field.Ball.Degree) * pi / 180) * 1) > 0))
+			{
 				// Отражение на 180
-			//	TBall.moveDeg = (180 - TBall.moveDeg) * 2 + TBall.moveDeg;
-			//	TBall.moveV *= 0.85;
-			//}
+				Field.Ball.Degree = (180 - Field.Ball.Degree) * 2 + Field.Ball.Degree;
+				Field.Ball.Speed *= 0.8;
+			}
 			Ball->Position->Y -= (sin(Field.Ball.Degree * pi / 180) * 1);
 			Ball->RotationAngle += 2 * ((cos(Field.Ball.Degree * pi / 180) * 1) - (sin(Field.Ball.Degree * pi / 180) * 1));
 			Field.Ball.Speed -= Field.Ball.Accelerate;
@@ -302,76 +294,6 @@ void __fastcall TBallGame::TimerStopBallTimer(TObject *Sender)
 		if (sqrt(((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y))*((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y)) + ((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))*((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))) <= TestPlayer->Width/4) {
 			Field.Ball.Speed = 0;
 		}
-	}
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TBallGame::ButtonConnectClick(TObject *Sender)
-{
-	Net.Team = 1;
-
-	// Activate TCP Server
-	IdTCPServer1->DefaultPort = 8880;
-	IdTCPServer1->Active = true;
-
-	// Activate UDP Server
-	IdTCPServer1->DefaultPort = 7770;
-	IdTCPServer1->Active = true;
-
-	IdTCPClient1->Host = EditIP->Text;
-	IdTCPClient1->Port = 8888;
-
-	IdTCPClient1->Connect();
-	if (IdTCPClient1->Connected())
-	{
-		IdTCPClient1->Socket->WriteLn("ClientReady");
-    }
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TBallGame::ButtonHostClick(TObject *Sender)
-{
-	Net.Team = 0;
-	AniIndicatorToolBar->Enabled = true;
-
-	// Activate TCP Server
-	IdTCPServer1->DefaultPort = 8888;
-	IdTCPServer1->Active = true;
-
-	// Activate UDP Server
-	IdTCPServer1->DefaultPort = 7777;
-	IdTCPServer1->Active = true;
-
-	IdTCPClient1->Port = 8880;
-	IdUDPClient1->Port = 7770;
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TBallGame::IdTCPServer1Execute(TIdContext *AContext)
-{
-	UnicodeString Response = AContext->Connection->Socket->ReadLn();
-
-	if (Response == "ClientReady")
-	{
-		Host = IdTCPServer1->Bindings->Items[0]->IP;
-        Host = "127.0.0.1";
-		IdTCPClient1->Host = Host;
-		IdUDPClient1->Host = Host;
-
-		IdTCPClient1->Connect();
-		if (IdTCPClient1->Connected())
-		{
-			IdTCPClient1->Socket->WriteLn("ServerReady");
-		}
-
-		LabelStatus->Text = "Status: client connected";
-		AniIndicatorToolBar->Enabled = false;
-	}
-
-	if (Response == "ServerReady")
-	{
-		LabelStatus->Text = "Status: connected to server";
-		AniIndicatorToolBar->Enabled = false;
 	}
 }
 //---------------------------------------------------------------------------
