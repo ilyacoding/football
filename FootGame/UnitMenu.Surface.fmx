@@ -1,0 +1,12 @@
+inherited FormMenu_Surface: TFormMenu_Surface
+  ClientHeight = 1920
+  ClientWidth = 1080
+  DesignerMasterStyle = 0
+  inherited ToolBarPlayers: TToolBar
+    Position.Y = 1831.000000000000000000
+    Size.Width = 1080.000000000000000000
+    inherited PanelPlayer3: TPanel
+      Position.X = 792.000000000000000000
+    end
+  end
+end

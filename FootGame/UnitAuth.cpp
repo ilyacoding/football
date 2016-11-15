@@ -14,37 +14,72 @@ __fastcall TFormAuth::TFormAuth(TComponent* Owner)
 	: TForm(Owner)
 {
 }
-//---------------------------------------------------------------------------
-void __fastcall TFormAuth::Button1Click(TObject *Sender)
-{
-	ofstream db("db.bin", ios_base::binary);
-	Profile play;
 
-	play.name = "Ilya";
-	play.cash = 5000;
-	play.level = 5;
-	play.wins = 2;
-	play.Team[0].name = "Вася";
-	play.Team[0].surname = "Пупкин";
-	play.Team[0].level = 8;
-	play.Team[0].speed = 5;
-
-	play.Team[1].name = "Вася";
-	play.Team[1].surname = "Пупкин";
-	play.Team[1].level = 8;
-	play.Team[1].speed = 10;
-
-	play.Team[2].name = "Вася";
-	play.Team[2].surname = "Пупкин";
-	play.Team[2].level = 8;
-	play.Team[2].speed = 5;
-
-	play.write(db);
-	db.close();
-
-	Profile play2;
-	ifstream db2("db.bin", ios_base::binary);
-	play2.read(db2);
-	Label1->Text = ToStr(play.Team[1].speed).c_str();
+string UnicodeToString(UnicodeString us) {
+	string result = AnsiString(us.t_str()).c_str();
+	return result;
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TFormAuth::ButtonLoginClick(TObject *Sender)
+{
+	string username = UnicodeToString(EditUsername->Text);
+	PID = Profiles.log(username);
+	if (PID > - 1) {
+		string msg = "Вы были успешно авторизированы под ником " + username;
+		ShowMessage(msg.c_str());
+	} else {
+		string msg = "Пользователя с ником " + username + " не существует. Сперва нужно зарегистрироваться.";
+		ShowMessage(msg.c_str());
+	}
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TFormAuth::FormShow(TObject *Sender)
+{
+	Profiles.in();
+	Label1->Text = ("Всего пользователей: " + ToStr(Profiles.length())).c_str();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormAuth::FormCloseQuery(TObject *Sender, bool &CanClose)
+{
+	Profiles.out();
+	CanClose = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormAuth::ButtonRegisterClick(TObject *Sender)
+{
+	TProfile profile;
+	profile.name = UnicodeToString(EditUsername->Text);
+	profile.level = 0;
+	profile.cash = 3000;
+	profile.wins = 0;
+	profile.Team[0].name = "Иван";
+	profile.Team[0].surname = "Петров";
+	profile.Team[0].level = 1;
+	profile.Team[0].speed = 5;
+
+	profile.Team[1].name = "Артем";
+	profile.Team[1].surname = "Черных";
+	profile.Team[1].level = 1;
+	profile.Team[1].speed = 5;
+
+	profile.Team[2].name = "Николай";
+	profile.Team[2].surname = "Победоносный";
+	profile.Team[2].level = 1;
+	profile.Team[2].speed = 5;
+
+	if (Profiles.reg(profile)) {
+		string msg = "Вы были успешно арегистрированы под ником " + profile.name;
+		ShowMessage(msg.c_str());
+	} else {
+		string msg = "Пользователя с ником " + profile.name + " уже существует. Можете войти.";
+		ShowMessage(msg.c_str());
+	}
+	Label1->Text = ("Всего пользователей: " + ToStr(Profiles.length())).c_str();
+}
+//---------------------------------------------------------------------------
+

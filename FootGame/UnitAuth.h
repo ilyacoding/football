@@ -15,9 +15,15 @@
 class TFormAuth : public TForm
 {
 __published:	// IDE-managed Components
-	TButton *Button1;
+	TButton *ButtonLogin;
+	TButton *ButtonRegister;
+	TEdit *EditUsername;
+	TLabel *LabelUsername;
 	TLabel *Label1;
-	void __fastcall Button1Click(TObject *Sender);
+	void __fastcall ButtonLoginClick(TObject *Sender);
+	void __fastcall FormShow(TObject *Sender);
+	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
+	void __fastcall ButtonRegisterClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TFormAuth(TComponent* Owner);

@@ -24,6 +24,8 @@ __fastcall TBallGame::TBallGame(TComponent* Owner)
 {
 }
 
+
+
 class TPlayer
 {
 	public:

@@ -1,6 +1,6 @@
 #include "inc.h"
 
-class Player {
+class TPlayer {
 public:
 	Player();
 	string name;
@@ -9,7 +9,7 @@ public:
 	int speed;
 };
 
-Player::Player()
+TPlayer::Player()
 {
 	name = "";
 	surname = "";
@@ -17,13 +17,13 @@ Player::Player()
 	speed = 0;
 }
 
-class Profile {
+class TProfile {
 public:
 	string name;
 	int level;
 	int cash;
 	int wins;
-	Player Team[3];
+	TPlayer Team[3];
 	void write(ofstream& ss);
 	void read(ifstream& ss);
 };
@@ -31,9 +31,10 @@ public:
 void TProfile::write(ofstream& ss)
 {
 	ss << name << " " << level << " " << cash << " " << wins << " ";
-	for (int i = 0; i < 3; i++)
-		ss << Team[i].name << " " << Team[i].surname << " " << Team[i].level << Team[i].speed << " ";
-	ss << endl;
+	for (int i = 0; i < 3; i++) {
+		ss << Team[i].name << " " << Team[i].surname << " " << Team[i].level << " " << Team[i].speed;
+		if (i < 2) ss << " ";
+	}
 }
 
 void TProfile::read(ifstream& ss)
@@ -54,36 +55,42 @@ public:
 	void out();
 	void in();
 	bool IsExist(string name);
-	bool reg();
-	int log();
+	bool reg(TProfile prfl);
+	int log(string name);
+	int length();
 };
 
 TProfiles::TProfiles()
 {
-	filenam = "db.bin";
+	filename = "db.bin";
 }
 
 void TProfiles::out()
 {
-	ofstream ss(filename.c_str());
+	ofstream ss(filename.c_str(), std::ofstream::out | std::ofstream::trunc);
 	for (int i = 0; i < user.size(); i++)
 	{
 		user[i].write(ss);
+		if (i != user.size() - 1) ss << endl;
 	}
+	user.clear();
+	ss.close();
 }
 
 void TProfiles::in()
 {
 	ifstream ss(filename.c_str());
-	Profile tmp;
+	TProfile tmp;
+	user.clear();
 	while (!ss.eof())
 	{
 		tmp.read(ss);
 		user.push_back(tmp);
 	}
+	ss.close();
 }
 
-bool IsExist(string name)
+bool TProfiles::IsExist(string name)
 {
 	for (int i = 0; i < user.size(); i++)
 		if (user[i].name == name)
@@ -91,10 +98,29 @@ bool IsExist(string name)
 	return false;
 }
 
-void TProfiles::reg(TProfile prfl)
+bool TProfiles::reg(TProfile prfl)
 {
-	if (!IsExist(profile))
-	user.push_back(prfl);
+	if (!IsExist(prfl.name))
+	{
+		user.push_back(prfl);
+		return true;
+	} else {
+		return false;
+	}
+}
+
+int TProfiles::log(string name)
+{
+	for (int i = 0; i < user.size(); i++)
+		if (user[i].name == name)
+			return i;
+	return -1;
+}
+
+int TProfiles::length()
+{
+	return user.size();
 }
 
 TProfiles Profiles;
+int PID = -1;
