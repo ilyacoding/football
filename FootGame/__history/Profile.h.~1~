@@ -1,0 +1,7 @@
+#include "inc.h"
+class Profile {
+private:
+	string name;
+	int lvl;
+	int cash;
+};

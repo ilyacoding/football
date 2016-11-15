@@ -113,14 +113,33 @@
             <BuildOrder>2</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
+        <None Include="inc.h">
+            <BuildOrder>6</BuildOrder>
+        </None>
+        <None Include="Profile.h">
+            <BuildOrder>5</BuildOrder>
+        </None>
+        <CppCompile Include="UnitAuth.cpp">
+            <Form>FormAuth</Form>
+            <FormType>fmx</FormType>
+            <DependentOn>UnitAuth.h</DependentOn>
+            <BuildOrder>4</BuildOrder>
+        </CppCompile>
         <CppCompile Include="UnitMain.cpp">
             <Form>BallGame</Form>
             <FormType>fmx</FormType>
             <DependentOn>UnitMain.h</DependentOn>
             <BuildOrder>1</BuildOrder>
         </CppCompile>
+        <CppCompile Include="UnitMenu.cpp">
+            <Form>FormMenu</Form>
+            <FormType>fmx</FormType>
+            <DependentOn>UnitMenu.h</DependentOn>
+            <BuildOrder>3</BuildOrder>
+        </CppCompile>
         <FormResources Include="UnitMain.fmx"/>
-        <FormResources Include="UnitMain.Surface.fmx"/>
+        <FormResources Include="UnitMenu.fmx"/>
+        <FormResources Include="UnitAuth.fmx"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

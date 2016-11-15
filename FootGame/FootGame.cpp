@@ -8,13 +8,17 @@
 #include <System.StartUpCopy.hpp>
 //---------------------------------------------------------------------------
 USEFORM("UnitMain.cpp", BallGame);
+USEFORM("UnitMenu.cpp", FormMenu);
+USEFORM("UnitAuth.cpp", FormAuth);
 //---------------------------------------------------------------------------
 extern "C" int FMXmain()
 {
 	try
 	{
 		Application->Initialize();
+		Application->CreateForm(__classid(TFormMenu), &FormMenu);
 		Application->CreateForm(__classid(TBallGame), &BallGame);
+		Application->CreateForm(__classid(TFormAuth), &FormAuth);
 		Application->Run();
 	}
 	catch (Exception &exception)

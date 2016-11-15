@@ -1,0 +1,20 @@
+//---------------------------------------------------------------------------
+
+#ifndef UnitMenuH
+#define UnitMenuH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+//---------------------------------------------------------------------------
+class TFormMenu : public TForm
+{
+__published:	// IDE-managed Components
+private:	// User declarations
+public:		// User declarations
+	__fastcall TFormMenu(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TFormMenu *FormMenu;
+//---------------------------------------------------------------------------
+#endif
