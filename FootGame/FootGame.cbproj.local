@@ -1,27 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.241,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.425,D:\RAD_Studio-Projects\FootGame\UnitConnect.cpp=D:\RAD_Studio-Projects\FootGame\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.264,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.210,=D:\Crypto\GitHub\FootBall\FootGame\Unit1.cpp</Transaction>
     <Transaction>1899.12.30 00:00:00.000.972,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.170,=D:\Crypto\GitHub\FootBall\FootGame\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.757,D:\Crypto\GitHub\FootBall\FootGame\Unit1.cpp=D:\Crypto\GitHub\FootBall\FootGame\UnitMenu.cpp</Transaction>
     <Transaction>1899.12.30 00:00:00.000.263,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.194,D:\RAD_Studio-Projects\FootGame\FootGame.cbproj=D:\RAD_Studio-Projects\FootGame\Project1.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.859,D:\RAD_Studio-Projects\FootGame\UnitMain.fmx=D:\RAD_Studio-Projects\FootGame\Unit1.fmx</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.425,D:\RAD_Studio-Projects\FootGame\UnitConnect.fmx=D:\RAD_Studio-Projects\FootGame\Unit1.fmx</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.859,D:\RAD_Studio-Projects\FootGame\UnitMain.h=D:\RAD_Studio-Projects\FootGame\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.970,D:\Crypto\GitHub\FootBall\FootGame\Unit1.fmx=D:\Crypto\GitHub\FootBall\FootGame\UnitAuth.fmx</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.264,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.241,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.970,D:\Crypto\GitHub\FootBall\FootGame\Unit1.cpp=D:\Crypto\GitHub\FootBall\FootGame\UnitAuth.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.606,D:\BSUIR\Course\Unit1.cpp=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.425,D:\RAD_Studio-Projects\FootGame\Unit1.cpp=D:\RAD_Studio-Projects\FootGame\UnitConnect.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.606,D:\BSUIR\Course\Unit1.fmx=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.183,D:\RAD_Studio-Projects\FootGame\Project1PCH1.h=D:\RAD_Studio-Projects\FootGame\FootGamePCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.742,D:\BSUIR\Course\Project1.cbproj=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.194,D:\RAD_Studio-Projects\FootGame\Project1.cbproj=D:\RAD_Studio-Projects\FootGame\FootGame.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.859,D:\RAD_Studio-Projects\FootGame\Unit1.cpp=D:\RAD_Studio-Projects\FootGame\UnitMain.cpp</Transaction>
     <Transaction>1899.12.30 00:00:00.000.506,=D:\RAD_Studio-Projects\FootGame\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.606,C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.fmx=D:\BSUIR\Course\Unit1.fmx</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.425,D:\RAD_Studio-Projects\FootGame\Unit1.h=D:\RAD_Studio-Projects\FootGame\UnitConnect.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.859,D:\RAD_Studio-Projects\FootGame\Unit1.h=D:\RAD_Studio-Projects\FootGame\UnitMain.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.970,D:\Crypto\GitHub\FootBall\FootGame\Unit1.h=D:\Crypto\GitHub\FootBall\FootGame\UnitAuth.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.757,D:\Crypto\GitHub\FootBall\FootGame\Unit1.h=D:\Crypto\GitHub\FootBall\FootGame\UnitMenu.h</Transaction>
     <Transaction>1899.12.30 00:00:00.000.300,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
     <Transaction>1899.12.30 00:00:00.000.893,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.253,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.715,C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1PCH1.h=D:\BSUIR\Course\Project1PCH1.h</Transaction>
     <Transaction>1899.12.30 00:00:00.000.021,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.183,D:\RAD_Studio-Projects\FootGame\FootGamePCH1.h=D:\RAD_Studio-Projects\FootGame\Project1PCH1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.859,D:\RAD_Studio-Projects\FootGame\UnitMain.cpp=D:\RAD_Studio-Projects\FootGame\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.606,C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.cpp=D:\BSUIR\Course\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.742,C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1.cbproj=D:\BSUIR\Course\Project1.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.606,C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.h=D:\BSUIR\Course\Unit1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.425,D:\RAD_Studio-Projects\FootGame\UnitConnect.h=D:\RAD_Studio-Projects\FootGame\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.253,=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.715,D:\BSUIR\Course\Project1PCH1.h=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.756,=D:\Crypto\GitHub\FootBall\FootGame\File1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.055,D:\Crypto\GitHub\FootBall\FootGame\File1.h=D:\Crypto\GitHub\FootBall\FootGame\Profile.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.757,D:\Crypto\GitHub\FootBall\FootGame\Unit1.fmx=D:\Crypto\GitHub\FootBall\FootGame\UnitMenu.fmx</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.712,D:\Crypto\GitHub\FootBall\FootGame\File1.h=D:\Crypto\GitHub\FootBall\FootGame\inc.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.425,D:\RAD_Studio-Projects\FootGame\Unit1.fmx=D:\RAD_Studio-Projects\FootGame\UnitConnect.fmx</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.606,D:\BSUIR\Course\Unit1.h=C:\Users\Ilya\Documents\Embarcadero\Studio\Projects\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.441,=D:\Crypto\GitHub\FootBall\FootGame\File1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.859,D:\RAD_Studio-Projects\FootGame\Unit1.fmx=D:\RAD_Studio-Projects\FootGame\UnitMain.fmx</Transaction>
   </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="FootGame.cpp"/>
+    <File Path="FootGamePCH1.h"/>
+    <File Path="UnitMenu.cpp"/>
+    <File Path="UnitMenu.cpp"/>
+    <File Path="UnitMenu.fmx"/>
+    <File Path="UnitMenu.h"/>
+    <File Path="UnitMain.cpp"/>
+    <File Path="UnitMain.cpp"/>
+    <File Path="UnitMain.fmx"/>
+    <File Path="UnitMain.h"/>
+    <File Path="UnitAuth.cpp"/>
+    <File Path="UnitAuth.cpp"/>
+    <File Path="UnitAuth.fmx"/>
+    <File Path="UnitAuth.h"/>
+    <File Path="Profile.h"/>
+    <File Path="inc.h"/>
+  </ProjectSortOrder>
 </BorlandProject>

@@ -1,0 +1,77 @@
+#include "inc.h"
+
+class Player {
+public:
+	Player();
+	string name;
+	string surname;
+	int level;
+	int speed;
+};
+
+Player::Player()
+{
+	name = "";
+	surname = "";
+	level = 0;
+	speed = 0;
+}
+
+class Profile {
+public:
+	string name;
+	int level;
+	int cash;
+	int wins;
+	Player Team[3];
+	void write(ofstream& ss);
+	void read(ifstream& ss);
+};
+
+void Profile::write(ofstream& ss)
+{
+	ss << name << " " << level << " " << cash << " " << wins << " ";
+	for (int i = 0; i < 3; i++)
+		ss << Team[i].name << " " << Team[i].surname << " " << Team[i].level << Team[i].speed << " ";
+	ss << endl;
+}
+
+void Profile::read(ifstream& ss)
+{
+	string str;
+	string tmp;
+	ss >> name >> level >> cash >> wins;
+    for (int i = 0; i < 3; i++)
+		ss >> Team[i].name >> Team[i].surname >> Team[i].level >> Team[i].speed;
+}
+
+class Profiles {
+private:
+	vector<Profile> User;
+public:
+	string filename;
+	void out();
+	void in();
+	bool reg();
+	int log();
+};
+
+void Profiles::out()
+{
+	ofstream ss(filename.c_str());
+	for (int i = 0; i < User.size(); i++)
+	{
+		User[i].write;
+	}
+}
+
+void Profiles::in()
+{
+	ifstream ss(filename.c_str());
+	Profile tmp;
+	while (!ss.eof())
+	{
+		tmp.read;
+		User.push_back(tmp);
+	}
+}
