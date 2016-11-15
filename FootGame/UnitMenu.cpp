@@ -9,6 +9,9 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.fmx"
+#pragma resource ("*.Windows.fmx", _PLAT_MSWINDOWS)
+#pragma resource ("*.Surface.fmx", _PLAT_MSWINDOWS)
+
 TFormMenu *FormMenu;
 //---------------------------------------------------------------------------
 __fastcall TFormMenu::TFormMenu(TComponent* Owner)
@@ -27,7 +30,6 @@ void __fastcall TFormMenu::ToolBarPlayersResize(TObject *Sender)
 
 void __fastcall TFormMenu::ButtonProfileClick(TObject *Sender)
 {
-
 	FormAuth->Show();
 }
 //---------------------------------------------------------------------------
