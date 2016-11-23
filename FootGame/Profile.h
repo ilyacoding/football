@@ -56,6 +56,7 @@ public:
 	void in();
 	bool IsExist(string name);
 	bool reg(TProfile prfl);
+	TProfile GetUser(int PID);
 	int log(string name);
 	int length();
 };
@@ -122,5 +123,9 @@ int TProfiles::length()
 	return user.size();
 }
 
-TProfiles Profiles;
-int PID = -1;
+TProfile TProfiles::GetUser(int PID)
+{
+	return user[PID];
+}
+
+

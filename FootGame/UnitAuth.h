@@ -22,7 +22,6 @@ __published:	// IDE-managed Components
 	TLabel *Label1;
 	void __fastcall ButtonLoginClick(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
-	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
 	void __fastcall ButtonRegisterClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
