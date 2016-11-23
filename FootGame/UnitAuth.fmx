@@ -7,7 +7,6 @@ object FormAuth: TFormAuth
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
-  OnCloseQuery = FormCloseQuery
   OnShow = FormShow
   DesignerMasterStyle = 0
   object ButtonLogin: TButton

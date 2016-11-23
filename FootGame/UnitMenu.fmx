@@ -7,6 +7,8 @@ object FormMenu: TFormMenu
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnCloseQuery = FormCloseQuery
   DesignerMasterStyle = 0
   object ButtonStartGame: TButton
     Position.X = 336.000000000000000000
@@ -14,17 +16,22 @@ object FormMenu: TFormMenu
     Size.Height = 33.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
-    Text = 'ButtonStartGame'
+    Text = #1053#1072#1095#1072#1090#1100' '#1080#1075#1088#1091'!'
+    OnClick = ButtonStartGameClick
   end
-  object Label1: TLabel
-    Position.X = 96.000000000000000000
+  object LabelInfo: TLabel
+    Position.X = 48.000000000000000000
     Position.Y = 8.000000000000000000
-    Text = 'Label1'
+    Size.Width = 289.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
   end
-  object Label2: TLabel
-    Position.X = 672.000000000000000000
+  object LabelUser: TLabel
+    Position.X = 648.000000000000000000
     Position.Y = 8.000000000000000000
-    Text = 'Label2'
+    Size.Width = 217.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
   end
   object ButtonProfile: TButton
     Position.X = 48.000000000000000000
@@ -33,7 +40,7 @@ object FormMenu: TFormMenu
     Size.Height = 180.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 6
-    Text = 'ButtonProfile'
+    Text = #1055#1088#1086#1092#1080#1083#1100
     OnClick = ButtonProfileClick
   end
   object ButtonTeam: TButton
@@ -93,5 +100,11 @@ object FormMenu: TFormMenu
       Size.PlatformDefault = False
       TabOrder = 2
     end
+  end
+  object TimerCheckUserLogin: TTimer
+    Interval = 500
+    OnTimer = TimerCheckUserLoginTimer
+    Left = 824
+    Top = 40
   end
 end

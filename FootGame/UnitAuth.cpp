@@ -4,7 +4,7 @@
 #pragma hdrstop
 
 #include "UnitAuth.h"
-#include "Profile.h"
+#include "UnitMenu.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.fmx"
@@ -24,9 +24,10 @@ string UnicodeToString(UnicodeString us) {
 void __fastcall TFormAuth::ButtonLoginClick(TObject *Sender)
 {
 	string username = UnicodeToString(EditUsername->Text);
-	PID = Profiles.log(username);
-	if (PID > - 1) {
+	FormMenu->PID = FormMenu->Profiles.log(username);
+	if (FormMenu->PID > - 1) {
 		string msg = "Вы были успешно авторизированы под ником " + username;
+		//FormMenu->LabelUser->Text = username.c_str();
 		ShowMessage(msg.c_str());
 	} else {
 		string msg = "Пользователя с ником " + username + " не существует. Сперва нужно зарегистрироваться.";
@@ -38,15 +39,7 @@ void __fastcall TFormAuth::ButtonLoginClick(TObject *Sender)
 
 void __fastcall TFormAuth::FormShow(TObject *Sender)
 {
-	Profiles.in();
-	Label1->Text = ("Всего пользователей: " + ToStr(Profiles.length())).c_str();
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TFormAuth::FormCloseQuery(TObject *Sender, bool &CanClose)
-{
-	Profiles.out();
-	CanClose = true;
+	Label1->Text = ("Всего пользователей: " + ToStr(FormMenu->Profiles.length())).c_str();
 }
 //---------------------------------------------------------------------------
 
@@ -72,14 +65,14 @@ void __fastcall TFormAuth::ButtonRegisterClick(TObject *Sender)
 	profile.Team[2].level = 1;
 	profile.Team[2].speed = 5;
 
-	if (Profiles.reg(profile)) {
-		string msg = "Вы были успешно арегистрированы под ником " + profile.name;
+	if (FormMenu->Profiles.reg(profile)) {
+		string msg = "Вы были успешно зарегистрированы под ником " + profile.name;
 		ShowMessage(msg.c_str());
 	} else {
 		string msg = "Пользователя с ником " + profile.name + " уже существует. Можете войти.";
 		ShowMessage(msg.c_str());
 	}
-	Label1->Text = ("Всего пользователей: " + ToStr(Profiles.length())).c_str();
+	Label1->Text = ("Всего пользователей: " + ToStr(FormMenu->Profiles.length())).c_str();
 }
 //---------------------------------------------------------------------------
 
