@@ -63,7 +63,7 @@ public:
 
 TProfiles::TProfiles()
 {
-	filename = "db.bin";
+	filename = "db/db.bin";
 }
 
 void TProfiles::out()
@@ -128,4 +128,36 @@ TProfile TProfiles::GetUser(int PID)
 	return user[PID];
 }
 
+class TPID {
+public:
+	int value;
+	//vector<TProfile> user;
+	TPID();
+	string filename;
+	void out();
+	void in();
+	//bool IsExist(string name);
+	//bool reg(TProfile prfl);
+	//TProfile GetUser(int PID);
+	//int log(string name);
+	//int length();
+};
 
+TPID::TPID()
+{
+	filename = "db/pid.bin";
+}
+
+void TPID::out()
+{
+	ofstream ss(filename.c_str(), std::ofstream::out | std::ofstream::trunc);
+	ss << value;
+	ss.close();
+}
+
+void TPID::in()
+{
+	ifstream ss(filename.c_str());
+	ss >> value;
+	ss.close();
+}

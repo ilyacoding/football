@@ -1,0 +1,11 @@
+object FormGlobStat: TFormGlobStat
+  Left = 0
+  Top = 0
+  Caption = 'FootBall | '#1043#1083#1086#1073#1072#1083#1100#1085#1072#1103' '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1072
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+end

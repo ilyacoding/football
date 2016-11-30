@@ -23,6 +23,7 @@ __published:	// IDE-managed Components
 	void __fastcall ButtonLoginClick(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall ButtonRegisterClick(TObject *Sender);
+	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TFormAuth(TComponent* Owner);
