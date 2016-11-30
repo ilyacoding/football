@@ -33,11 +33,10 @@ __published:	// IDE-managed Components
 	void __fastcall TimerCheckUserLoginTimer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
+	void __fastcall ButtonGlobStatClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TFormMenu(TComponent* Owner);
-	TProfiles Profiles;
-	int PID;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TFormMenu *FormMenu;

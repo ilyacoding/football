@@ -125,6 +125,12 @@
             <DependentOn>UnitAuth.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
+        <CppCompile Include="UnitGlobStat.cpp">
+            <Form>FormGlobStat</Form>
+            <FormType>fmx</FormType>
+            <DependentOn>UnitGlobStat.h</DependentOn>
+            <BuildOrder>7</BuildOrder>
+        </CppCompile>
         <CppCompile Include="UnitMain.cpp">
             <Form>BallGame</Form>
             <FormType>fmx</FormType>
@@ -139,10 +145,10 @@
         </CppCompile>
         <FormResources Include="UnitAuth.fmx"/>
         <FormResources Include="UnitMain.fmx"/>
-        <FormResources Include="UnitMain.Surface.fmx"/>
         <FormResources Include="UnitMenu.fmx"/>
         <FormResources Include="UnitMenu.Windows.fmx"/>
         <FormResources Include="UnitMenu.Surface.fmx"/>
+        <FormResources Include="UnitGlobStat.fmx"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

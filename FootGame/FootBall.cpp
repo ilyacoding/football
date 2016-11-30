@@ -10,6 +10,7 @@
 USEFORM("UnitAuth.cpp", FormAuth);
 USEFORM("UnitMain.cpp", BallGame);
 USEFORM("UnitMenu.cpp", FormMenu);
+USEFORM("UnitGlobStat.cpp", FormGlobStat);
 //---------------------------------------------------------------------------
 extern "C" int FMXmain()
 {
@@ -19,6 +20,7 @@ extern "C" int FMXmain()
 		Application->CreateForm(__classid(TFormMenu), &FormMenu);
 		Application->CreateForm(__classid(TBallGame), &BallGame);
 		Application->CreateForm(__classid(TFormAuth), &FormAuth);
+		Application->CreateForm(__classid(TFormGlobStat), &FormGlobStat);
 		Application->Run();
 	}
 	catch (Exception &exception)

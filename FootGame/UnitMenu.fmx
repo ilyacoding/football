@@ -59,7 +59,8 @@ object FormMenu: TFormMenu
     Size.Height = 180.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 4
-    Text = 'ButtonGlobStat'
+    Text = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
+    OnClick = ButtonGlobStatClick
   end
   object ButtonInfo: TButton
     Position.X = 648.000000000000000000
@@ -104,7 +105,7 @@ object FormMenu: TFormMenu
   object TimerCheckUserLogin: TTimer
     Interval = 500
     OnTimer = TimerCheckUserLoginTimer
-    Left = 824
+    Left = 800
     Top = 40
   end
 end

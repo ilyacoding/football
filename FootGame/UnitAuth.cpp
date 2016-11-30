@@ -4,16 +4,20 @@
 #pragma hdrstop
 
 #include "UnitAuth.h"
-#include "UnitMenu.h"
+#include "Profile.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.fmx"
 TFormAuth *FormAuth;
+TProfiles Profiles;
+TPID PID;
 //---------------------------------------------------------------------------
 __fastcall TFormAuth::TFormAuth(TComponent* Owner)
 	: TForm(Owner)
 {
 }
+
+
 
 string UnicodeToString(UnicodeString us) {
 	string result = AnsiString(us.t_str()).c_str();
@@ -24,11 +28,12 @@ string UnicodeToString(UnicodeString us) {
 void __fastcall TFormAuth::ButtonLoginClick(TObject *Sender)
 {
 	string username = UnicodeToString(EditUsername->Text);
-	FormMenu->PID = FormMenu->Profiles.log(username);
-	if (FormMenu->PID > - 1) {
+	PID.value = Profiles.log(username);
+	if (PID.value > - 1) {
 		string msg = "Вы были успешно авторизированы под ником " + username;
 		//FormMenu->LabelUser->Text = username.c_str();
 		ShowMessage(msg.c_str());
+		PID.out();
 	} else {
 		string msg = "Пользователя с ником " + username + " не существует. Сперва нужно зарегистрироваться.";
 		ShowMessage(msg.c_str());
@@ -39,7 +44,9 @@ void __fastcall TFormAuth::ButtonLoginClick(TObject *Sender)
 
 void __fastcall TFormAuth::FormShow(TObject *Sender)
 {
-	Label1->Text = ("Всего пользователей: " + ToStr(FormMenu->Profiles.length())).c_str();
+	PID.in();
+	Profiles.in();
+	Label1->Text = ("Всего пользователей: " + ToStr(Profiles.length())).c_str();
 }
 //---------------------------------------------------------------------------
 
@@ -51,7 +58,7 @@ void __fastcall TFormAuth::ButtonRegisterClick(TObject *Sender)
 	profile.cash = 3000;
 	profile.wins = 0;
 	profile.Team[0].name = "Иван";
-	profile.Team[0].surname = "Петров";
+	profile.Team[0].surname = "Петрович";
 	profile.Team[0].level = 1;
 	profile.Team[0].speed = 5;
 
@@ -65,14 +72,25 @@ void __fastcall TFormAuth::ButtonRegisterClick(TObject *Sender)
 	profile.Team[2].level = 1;
 	profile.Team[2].speed = 5;
 
-	if (FormMenu->Profiles.reg(profile)) {
+	if (Profiles.reg(profile)) {
 		string msg = "Вы были успешно зарегистрированы под ником " + profile.name;
 		ShowMessage(msg.c_str());
 	} else {
 		string msg = "Пользователя с ником " + profile.name + " уже существует. Можете войти.";
 		ShowMessage(msg.c_str());
 	}
-	Label1->Text = ("Всего пользователей: " + ToStr(FormMenu->Profiles.length())).c_str();
+	Profiles.out();
+	Profiles.in();
+	Label1->Text = ("Всего пользователей: " + ToStr(Profiles.length())).c_str();
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TFormAuth::FormCloseQuery(TObject *Sender, bool &CanClose)
+{
+	PID.out();
+	Profiles.out();
+	CanClose = true;
 }
 //---------------------------------------------------------------------------
 

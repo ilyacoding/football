@@ -1,0 +1,35 @@
+object FormGlobStat: TFormGlobStat
+  Left = 0
+  Top = 0
+  Caption = 'FootBall | '#1043#1083#1086#1073#1072#1083#1100#1085#1072#1103' '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1072
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object ListBox1: TListBox
+    Position.Y = 40.000000000000000000
+    Size.Width = 641.000000000000000000
+    Size.Height = 441.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 637.000000000000000000
+    Viewport.Height = 437.000000000000000000
+  end
+  object LabelStat: TLabel
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 8.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 24.000000000000000000
+    Text = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
+  end
+end
