@@ -4,7 +4,8 @@
 #pragma hdrstop
 
 #include "UnitMain.h"
-#include "math.h"
+#include "ClassTField.h"
+#include "ClassTGame.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.fmx"
@@ -12,10 +13,13 @@
 
 // Константы, важные объявления
 TFormMain *FormMain;
+TField Field;
+TGame Game;
 UnicodeString Host;
-const double pi = 3.14159265358979323;
-const int TeamSize = 3;
-int UniqNum = 0;
+
+double GoalKeeperDelta[2] = { (double)88/1062, (double)(1062 - 88)/1062};
+double AttackerDelta[2] = { (double)472/1062, (double)(1062 - 472)/1062};
+double DefenderDelta[2] = { (double)340/1062, (double)(1062 - 340)/1062};
 // Константы, важные объявления
 
 //---------------------------------------------------------------------------
@@ -24,137 +28,37 @@ __fastcall TFormMain::TFormMain(TComponent* Owner)
 {
 }
 
-
-
-class TPlayer
+void __fastcall TFormMain::InitField()
 {
-	public:
-		int Speed;
-		float mouseX, mouseY;
-		bool InGame;
-		TImage* Img;
-		TText* Txt;
-};
+	// Background Start
+	Field.Background = ImageBackground;
+	Field.Background->Bitmap->LoadFromFile("img/field.jpg");
+	// Background end
 
-class TTeam
-{
-	public:
-		TPlayer Player[TeamSize];
-		int CurrPlayer;
-		int Score;
-		int GetAmount();
-		bool AddPlayer(float PosX, float PosY, char ImgColor);
-		bool DeletePlayer(int N);
-};
+	// Ball Start
+	Field.Ball.CBall = Ball;
+	Field.Ball.Speed = 0;
+	Field.Ball.Degree = 0;
+	Field.Ball.CBall->Position->X = (PanelPlayArea->Width - Field.Ball.CBall->Width)/2;
+	Field.Ball.CBall->Position->Y = (PanelPlayArea->Height - Field.Ball.CBall->Height)/2;
+	// Ball end
 
-class TBall
-{
-	public:
-		float Speed, Accelerate, Degree;
-};
+	// Players Start
+	// - Team0 (Robotics)
+	Field.Team[0].AddPlayer((GoalKeeperDelta[0]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'r');
+	Field.Team[0].AddPlayer((AttackerDelta[0]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'r');
+	Field.Team[0].AddPlayer((DefenderDelta[0]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'r');
+	// - Team1 (Main)
+	Field.Team[1].AddPlayer((GoalKeeperDelta[1]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'r');
+	Field.Team[1].AddPlayer((AttackerDelta[1]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'r');
+	Field.Team[1].AddPlayer((DefenderDelta[1]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'r');
+	// Players end
 
-class TField
-{
-	public:
-		TTeam Team[2];
-		TBall Ball;
-		TImage* Background;
-		float CalcDegree(float FromX, float FromY, float ToX, float ToY);
-		float CalcDistance(float FromX, float FromY, float ToX, float ToY);
-} Field;
-
-int TTeam::GetAmount()
-{
-	int Amount = 0;
-	for (int i = 0; i < TeamSize; i++)
-		if (Player[i].InGame)
-			Amount++;
-	return Amount;
-}
-
-bool TTeam::AddPlayer(float PosX, float PosY, char ImgColor)
-{
-	if (GetAmount() < TeamSize)
-	{
-		int i = 0;
-		while (Player[i].InGame) i++;
-		Player[i].Speed = 0;
-		Player[i].mouseX = 0;
-		Player[i].mouseY = 0;
-		Player[i].InGame = true;
-
-		// Создаем картинку игрока
-		Player[i].Img = new TImage(FormMain);
-		Player[i].Img->Parent = Field.Background;
-		Player[i].Img->Name = "Image" + AnsiString(i) + "Team" + ++UniqNum;
-		Player[i].Img->Width = 64;
-		Player[i].Img->Height = 64;
-		Player[i].Img->Position->X = PosX;
-		Player[i].Img->Position->Y = PosY;
-		switch(ImgColor)
-		{
-			case 'r':
-				Player[i].Img->Bitmap->LoadFromFile("img/player.png");
-				break;
-			case 'b':
-				Player[i].Img->Bitmap->LoadFromFile("img/player.png");
-				break;
-			default:
-				Player[i].Img->Bitmap->LoadFromFile("img/player.png");
-				break;
-		}
-
-		// Номер игрока, поверх картинки
-		Player[i].Txt = new TText(FormMain);
-		Player[i].Txt->Parent = FormMain->ImageBackground;
-		Player[i].Txt->Height = 64;
-		Player[i].Txt->Width = 64;
-		Player[i].Txt->Name = "Text" + AnsiString(i) + "Team" + ++UniqNum;
-		Player[i].Txt->Text = AnsiString(i + 1);
-		Player[i].Txt->Font->Size = 36;
-		Player[i].Txt->TextSettings->FontColor = TAlphaColor(claBlack);
-		Player[i].Txt->Position->X = PosX;
-		Player[i].Txt->Position->Y = PosY;
-		return true;
-	} else {
-		return false;
-	}
-}
-
-bool TTeam::DeletePlayer(int N)
-{
-	if (Player[N].InGame)
-	{
-		Player[N].Speed = 0;
-		Player[N].mouseX = 0;
-		Player[N].mouseY = 0;
-		Player[N].InGame = false;
-		delete Player[N].Img;
-		delete Player[N].Txt;
-		return true;
-	} else {
-		return false;
-    }
-}
-
-float TField::CalcDegree(float FromX, float FromY, float ToX, float ToY)
-{
-	if ((ToX - (FromX) > 0) && (ToY - (FromY) > 0)) {// X+ Y+
-		return ceil(atan(fabs(ToX - (FromX))/fabs(ToY - (FromY))) * 180 / pi) + 270;
-	} else if ((ToX - (FromX) < 0) && (ToY - (FromY) > 0)) {// X- Y+
-		return ceil(atan(fabs(ToY - (FromY))/fabs(ToX - (FromX))) * 180 / pi) + 180;
-	} else if ((ToX - (FromX) > 0) && (ToY - (FromY) < 0)) {// X+ Y-
-		return ceil(atan(fabs(ToY - (FromY))/fabs(ToX - (FromX))) * 180 / pi);
-	} else if ((ToX - (FromX) < 0) && (ToY - (FromY) < 0)) {// X- Y-
-		return 180 - ceil(atan(fabs(ToY - (FromY))/fabs(ToX - (FromX))) * 180 / pi);
-	} else {
-		return 0;
-	}
-}
-
-float TField::CalcDistance(float FromX, float FromY, float ToX, float ToY)
-{
-	return sqrt(((FromY) - (ToY))*((FromY) - (ToY)) + ((FromX) - (ToX))*((FromX) - (ToX)));
+	// Timers Start
+	TimerMoveBall->Enabled = true;
+	//TimerMoveUser->Enabled = true;
+	TimerStopBall->Enabled = true;
+	// Timers end
 }
 
 //---------------------------------------------------------------------------
@@ -173,25 +77,6 @@ void __fastcall TFormMain::TimerMoveUserTimer(TObject *Sender)
             Field.Background->Repaint();
 		}
     }
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TFormMain::FormCreate(TObject *Sender)
-{
-	// Background
-	Field.Background = ImageBackground;
-	Field.Background->Bitmap->LoadFromFile("img/bg.png");
-
-	// Players
-	for (int i = 1; Field.Team[0].AddPlayer(i*70, i*70, 'r'); i++);
-	Field.Team[0].CurrPlayer = 0;
-
-	for (int i = 1; Field.Team[1].AddPlayer(400, i*10 + 20, 'r'); i++);
-	Field.Team[1].CurrPlayer = 0;
-	// Ball
-	Field.Ball.Degree = 0;
-	Field.Ball.Accelerate = 0.002;
-	Field.Ball.Speed = 1;
 }
 
 //---------------------------------------------------------------------------
@@ -231,7 +116,7 @@ void __fastcall TFormMain::FormKeyDown(TObject *Sender, WORD &Key, System::WideC
 	if ((KeyChar == 'w') && (Field.CalcDistance(Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y, Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->X + Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Width/2, Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->Y + Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Height/2) <= Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Height)) {
 		Field.Ball.Speed += 3;
 		Field.Ball.Degree = Field.CalcDegree(Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Width/2 + Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->X, Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Height/2 + Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->Y, Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y);
-	} else if (isdigit(KeyChar) && (KeyChar - '0' <= TeamSize)) {
+	} else if (isdigit(KeyChar) && (KeyChar - '0' <= 3)) {
 		Field.Team[0].Player[Field.Team[0].CurrPlayer].Speed = 2;
 		Field.Team[0].CurrPlayer = KeyChar - '0' - 1;
 	}
@@ -244,13 +129,15 @@ void __fastcall TFormMain::PanelPlayAreaMouseMove(TObject *Sender, TShiftState S
 	Field.Team[0].Player[Field.Team[0].CurrPlayer].mouseX = X;
 	Field.Team[0].Player[Field.Team[0].CurrPlayer].mouseY = Y;
 	Field.Team[0].Player[Field.Team[0].CurrPlayer].Speed = 5;
+	Label2->Text = ToStr(X).c_str();
+	Label3->Text = ToStr(Y).c_str();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TFormMain::TimerStopBallTimer(TObject *Sender)
 {
 	TImage* TestPlayer;
-	for (int i = 0; i < TeamSize; i++) {
+	for (int i = 0; i < 3; i++) {
 		TestPlayer = Field.Team[0].Player[i].Img;
 		if (sqrt(((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y))*((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y)) + ((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))*((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))) <= TestPlayer->Width/4) {
 			Field.Ball.Speed = 0;
@@ -258,4 +145,13 @@ void __fastcall TFormMain::TimerStopBallTimer(TObject *Sender)
 	}
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TFormMain::FormShow(TObject *Sender)
+{
+	InitField();
+
+
+}
+//---------------------------------------------------------------------------
+
 

@@ -33,6 +33,8 @@
 #include <FMX.Menus.hpp>
 #include <FMX.ComboEdit.hpp>
 #include <IdContext.hpp>
+
+
 //---------------------------------------------------------------------------
 class TFormMain : public TForm
 {
@@ -44,29 +46,29 @@ __published:	// IDE-managed Components
 	TPanel *PanelPlayArea;
 	TTimer *TimerStopBall;
 	TLabel *LabelFPS;
-	TToolBar *ToolBarTop;
-	TMenuBar *MenuBar1;
-	TMenuItem *MenuItemGame;
-	TMenuItem *MenuItemSettings;
-	TMenuItem *MenuItemInfo;
 	TLabel *Label1;
-	void __fastcall TimerMoveUserTimer(TObject *Sender); //
-	void __fastcall FormCreate(TObject *Sender);
+	TLabel *Label2;
+	TLabel *Label3;
+	void __fastcall TimerMoveUserTimer(TObject *Sender);
 	void __fastcall TimerMoveBallTimer(TObject *Sender);
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
-          TShiftState Shift);
+		  TShiftState Shift);
 	void __fastcall PanelPlayAreaMouseMove(TObject *Sender, TShiftState Shift, float X, float Y);
 	void __fastcall TimerStopBallTimer(TObject *Sender);
-   //	void __fastcall IdTCPServer1Execute(TIdContext *AContext);
-
-
+	void __fastcall FormShow(TObject *Sender);
+	void __fastcall InitField();
 private:	// User declarations
 public:		// User declarations
 	TImage *tmpImage;
 	TLabel *tmpLabel;
 	__fastcall TFormMain(TComponent* Owner);
 };
+
+
 //---------------------------------------------------------------------------
 extern PACKAGE TFormMain *FormMain;
+int UniqNum = 0;
 //---------------------------------------------------------------------------
 #endif
+
+

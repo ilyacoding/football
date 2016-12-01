@@ -102,10 +102,27 @@
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <LinkPackageImports>rtl.bpi;fmx.bpi;IndyCore.bpi;IndySystem.bpi</LinkPackageImports>
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="ClassTBall.cpp">
+            <DependentOn>ClassTBall.h</DependentOn>
+            <BuildOrder>15</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="ClassTField.cpp">
+            <DependentOn>ClassTField.h</DependentOn>
+            <BuildOrder>15</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="ClassTFiPlayer.cpp">
+            <DependentOn>ClassTFiPlayer.h</DependentOn>
+            <BuildOrder>12</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="ClassTGame.cpp">
+            <DependentOn>ClassTGame.h</DependentOn>
+            <BuildOrder>11</BuildOrder>
+        </CppCompile>
         <CppCompile Include="ClassTPid.cpp">
             <DependentOn>ClassTPid.h</DependentOn>
             <BuildOrder>11</BuildOrder>
@@ -117,6 +134,10 @@
         <CppCompile Include="ClassTProfile.cpp">
             <DependentOn>ClassTProfile.h</DependentOn>
             <BuildOrder>8</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="ClassTTeam.cpp">
+            <DependentOn>ClassTTeam.h</DependentOn>
+            <BuildOrder>13</BuildOrder>
         </CppCompile>
         <CppCompile Include="ClassTUdb.cpp">
             <DependentOn>ClassTUdb.h</DependentOn>
@@ -157,13 +178,11 @@
             <DependentOn>UnitStat.h</DependentOn>
             <BuildOrder>7</BuildOrder>
         </CppCompile>
-        <FormResources Include="UnitStat.fmx"/>
         <FormResources Include="UnitAuth.fmx"/>
-        <FormResources Include="UnitMenu.fmx"/>
-        <FormResources Include="UnitMenu.Windows.fmx"/>
-        <FormResources Include="UnitMenu.Surface.fmx"/>
         <FormResources Include="UnitMain.fmx"/>
         <FormResources Include="UnitMain.Surface.fmx"/>
+        <FormResources Include="UnitStat.fmx"/>
+        <FormResources Include="UnitMenu.fmx"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

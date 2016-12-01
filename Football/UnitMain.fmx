@@ -7,22 +7,25 @@ object FormMain: TFormMain
   FormFactor.Width = 700
   FormFactor.Height = 1400
   FormFactor.Devices = [Desktop]
-  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object TimerMoveUser: TTimer
+    Enabled = False
     Interval = 20
     OnTimer = TimerMoveUserTimer
     Left = 920
     Top = 8
   end
   object TimerMoveBall: TTimer
+    Enabled = False
     Interval = 20
     OnTimer = TimerMoveBallTimer
     Left = 832
     Top = 8
   end
   object TimerStopBall: TTimer
+    Enabled = False
     Interval = 10
     OnTimer = TimerStopBallTimer
     Left = 920
@@ -35,7 +38,7 @@ object FormMain: TFormMain
     Align = Client
     Cursor = crCross
     Size.Width = 1065.000000000000000000
-    Size.Height = 564.000000000000000000
+    Size.Height = 589.000000000000000000
     Size.PlatformDefault = False
     WrapMode = Stretch
     object Ball: TCircle
@@ -283,49 +286,38 @@ object FormMain: TFormMain
       Stroke.Bitmap.WrapMode = TileStretch
       Stroke.Kind = Bitmap
     end
+    object Label2: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 40.000000000000000000
+      Text = 'Label2'
+    end
   end
   object PanelPlayArea: TPanel
     Align = Client
     Opacity = 0.000000000000000000
     Size.Width = 1065.000000000000000000
-    Size.Height = 564.000000000000000000
+    Size.Height = 589.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'panelstyle'
-    TabOrder = 12
+    TabOrder = 11
     OnMouseMove = PanelPlayAreaMouseMove
   end
   object LabelFPS: TLabel
     StyledSettings = [Family, Size]
     Position.X = 8.000000000000000000
-    Position.Y = 32.000000000000000000
+    Position.Y = 8.000000000000000000
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     TextSettings.FontColor = claCrimson
     Text = '60 fps'
   end
-  object ToolBarTop: TToolBar
-    Size.Width = 1065.000000000000000000
-    Size.Height = 25.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 11
-    object MenuBar1: TMenuBar
-      Size.Width = 1065.000000000000000000
-      Size.Height = 24.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 0
-      object MenuItemGame: TMenuItem
-        Text = #1048#1075#1088#1072
-      end
-      object MenuItemSettings: TMenuItem
-        Text = #1053#1072#1089#1090#1088#1086#1081#1082#1080
-      end
-      object MenuItemInfo: TMenuItem
-        Text = #1057#1087#1088#1072#1074#1082#1072
-      end
-    end
-  end
   object Label1: TLabel
     Position.X = 8.000000000000000000
-    Position.Y = 48.000000000000000000
+    Position.Y = 24.000000000000000000
     Text = 'Label1'
+  end
+  object Label3: TLabel
+    Position.X = 8.000000000000000000
+    Position.Y = 56.000000000000000000
+    Text = 'Label3'
   end
 end
