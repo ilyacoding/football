@@ -1,3 +1,0 @@
-inherited FormMenu_Windows: TFormMenu_Windows
-  DesignerMasterStyle = 0
-end
