@@ -33,11 +33,11 @@ bool TTeam::AddPlayer(float PosX, float PosY, char ImgColor)
 		Player[i].Img->Position->Y = PosY;
 		switch(ImgColor)
 		{
-			case 'r':
-				Player[i].Img->Bitmap->LoadFromFile("img/player.png");
-				break;
 			case 'b':
-				Player[i].Img->Bitmap->LoadFromFile("img/player.png");
+				Player[i].Img->Bitmap->LoadFromFile("img/player0.png");
+				break;
+			case 'o':
+				Player[i].Img->Bitmap->LoadFromFile("img/player1.png");
 				break;
 			default:
 				Player[i].Img->Bitmap->LoadFromFile("img/player.png");

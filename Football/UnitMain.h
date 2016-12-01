@@ -44,19 +44,23 @@ __published:	// IDE-managed Components
 	TCircle *Ball;
 	TTimer *TimerMoveBall;
 	TPanel *PanelPlayArea;
-	TTimer *TimerStopBall;
+	TTimer *TimerCheckBall;
 	TLabel *LabelFPS;
 	TLabel *Label1;
 	TLabel *Label2;
 	TLabel *Label3;
+	TToolBar *ToolBarMenu;
+	TLabel *LabelCount;
 	void __fastcall TimerMoveUserTimer(TObject *Sender);
 	void __fastcall TimerMoveBallTimer(TObject *Sender);
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
 		  TShiftState Shift);
 	void __fastcall PanelPlayAreaMouseMove(TObject *Sender, TShiftState Shift, float X, float Y);
-	void __fastcall TimerStopBallTimer(TObject *Sender);
+	void __fastcall TimerCheckBallTimer(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall InitField();
+	void __fastcall DestroyField();
+	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
 private:	// User declarations
 public:		// User declarations
 	TImage *tmpImage;

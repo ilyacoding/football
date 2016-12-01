@@ -7,6 +7,7 @@ object FormMain: TFormMain
   FormFactor.Width = 700
   FormFactor.Height = 1400
   FormFactor.Devices = [Desktop]
+  OnCloseQuery = FormCloseQuery
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   DesignerMasterStyle = 0
@@ -24,10 +25,10 @@ object FormMain: TFormMain
     Left = 832
     Top = 8
   end
-  object TimerStopBall: TTimer
+  object TimerCheckBall: TTimer
     Enabled = False
     Interval = 10
-    OnTimer = TimerStopBallTimer
+    OnTimer = TimerCheckBallTimer
     Left = 920
     Top = 56
   end
@@ -38,7 +39,7 @@ object FormMain: TFormMain
     Align = Client
     Cursor = crCross
     Size.Width = 1065.000000000000000000
-    Size.Height = 589.000000000000000000
+    Size.Height = 549.000000000000000000
     Size.PlatformDefault = False
     WrapMode = Stretch
     object Ball: TCircle
@@ -296,7 +297,7 @@ object FormMain: TFormMain
     Align = Client
     Opacity = 0.000000000000000000
     Size.Width = 1065.000000000000000000
-    Size.Height = 589.000000000000000000
+    Size.Height = 549.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'panelstyle'
     TabOrder = 11
@@ -312,12 +313,33 @@ object FormMain: TFormMain
   end
   object Label1: TLabel
     Position.X = 8.000000000000000000
-    Position.Y = 24.000000000000000000
+    Position.Y = 48.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
     Text = 'Label1'
   end
   object Label3: TLabel
     Position.X = 8.000000000000000000
-    Position.Y = 56.000000000000000000
+    Position.Y = 64.000000000000000000
     Text = 'Label3'
+  end
+  object ToolBarMenu: TToolBar
+    Size.Width = 1065.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 15
+    object LabelCount: TLabel
+      Anchors = [akTop]
+      StyledSettings = [Family]
+      Position.X = 400.000000000000000000
+      Size.Width = 169.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 30.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claPurple
+      Text = #1057#1095#1105#1090':'
+    end
   end
 end

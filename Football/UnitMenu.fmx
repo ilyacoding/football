@@ -49,7 +49,7 @@ object FormMenu: TFormMenu
     Anchors = [akTop]
     DisableFocusEffect = True
     StyledSettings = [Style]
-    Opacity = 0.800000011920929000
+    Opacity = 0.949999988079071000
     Position.X = 48.000000000000000000
     Position.Y = 96.000000000000000000
     Size.Width = 180.000000000000000000
@@ -75,7 +75,7 @@ object FormMenu: TFormMenu
   object ButtonGlobStat: TButton
     Anchors = [akTop]
     StyledSettings = [Style]
-    Opacity = 0.800000011920929000
+    Opacity = 0.949999988079071000
     Position.X = 448.000000000000000000
     Position.Y = 96.000000000000000000
     Size.Width = 180.000000000000000000
