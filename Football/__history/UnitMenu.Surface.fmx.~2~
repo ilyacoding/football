@@ -1,0 +1,46 @@
+inherited FormMenu_Surface: TFormMenu_Surface
+  ClientHeight = 1920
+  ClientWidth = 1080
+  DesignerMasterStyle = 0
+  inherited ButtonStartGame: TButton [0]
+  end
+  inherited LabelInfo: TLabel [1]
+    Anchors = [akTop]
+  end
+  inherited LabelUser: TLabel [2]
+  end
+  inherited ButtonProfile: TButton [3]
+  end
+  inherited ButtonTeam: TButton [4]
+  end
+  inherited ButtonGlobStat: TButton [5]
+  end
+  inherited ButtonInfo: TButton [6]
+  end
+  inherited ToolBarPlayers: TToolBar [7]
+    Position.Y = 1831.000000000000000000
+    Size.Width = 1080.000000000000000000
+    inherited PanelPlayer0: TPanel
+      inherited LabelName0: TLabel
+        TextSettings.Font.StyleExt = {04040000000000000004000000}
+      end
+    end
+    inherited PanelPlayer1: TPanel
+      inherited LabelName1: TLabel
+        TextSettings.Font.StyleExt = {04040000000000000004000000}
+      end
+    end
+    inherited PanelPlayer2: TPanel
+      Position.X = 792.000000000000000000
+      inherited LabelName2: TLabel
+        TextSettings.Font.StyleExt = {04040000000000000004000000}
+      end
+    end
+  end
+  inherited TimerCheckUserLogin: TTimer [8]
+  end
+  inherited ImageBackground: TImage [9]
+    Size.Width = 1080.000000000000000000
+    Size.Height = 1831.000000000000000000
+  end
+end

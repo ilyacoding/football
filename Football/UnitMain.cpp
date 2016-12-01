@@ -20,6 +20,7 @@ UnicodeString Host;
 double GoalKeeperDelta[2] = { (double)88/1062, (double)(1062 - 88)/1062};
 double AttackerDelta[2] = { (double)472/1062, (double)(1062 - 472)/1062};
 double DefenderDelta[2] = { (double)340/1062, (double)(1062 - 340)/1062};
+double BallDelta[2] = { (double)182/1062, (double)(1062 - 182)/1062};
 // Константы, важные объявления
 
 //---------------------------------------------------------------------------
@@ -45,19 +46,38 @@ void __fastcall TFormMain::InitField()
 
 	// Players Start
 	// - Team0 (Robotics)
-	Field.Team[0].AddPlayer((GoalKeeperDelta[0]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'r');
-	Field.Team[0].AddPlayer((AttackerDelta[0]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'r');
-	Field.Team[0].AddPlayer((DefenderDelta[0]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'r');
+	Field.Team[0].AddPlayer((GoalKeeperDelta[0]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'b');
+	Field.Team[0].AddPlayer((AttackerDelta[0]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'b');
+	Field.Team[0].AddPlayer((DefenderDelta[0]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'b');
 	// - Team1 (Main)
-	Field.Team[1].AddPlayer((GoalKeeperDelta[1]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'r');
-	Field.Team[1].AddPlayer((AttackerDelta[1]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'r');
-	Field.Team[1].AddPlayer((DefenderDelta[1]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'r');
+	Field.Team[1].AddPlayer((GoalKeeperDelta[1]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'o');
+	Field.Team[1].AddPlayer((AttackerDelta[1]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'o');
+	Field.Team[1].AddPlayer((DefenderDelta[1]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'o');
 	// Players end
 
 	// Timers Start
 	TimerMoveBall->Enabled = true;
-	//TimerMoveUser->Enabled = true;
-	TimerStopBall->Enabled = true;
+	TimerMoveUser->Enabled = true;
+	TimerCheckBall->Enabled = true;
+	// Timers end
+}
+
+void __fastcall TFormMain::DestroyField()
+{
+	// Players Start
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			Field.Team[i].DeletePlayer(j);
+        }
+    }
+	// Players end
+
+	// Timers Start
+	TimerMoveBall->Enabled = false;
+	TimerMoveUser->Enabled = false;
+	TimerCheckBall->Enabled = false;
 	// Timers end
 }
 
@@ -134,14 +154,47 @@ void __fastcall TFormMain::PanelPlayAreaMouseMove(TObject *Sender, TShiftState S
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TFormMain::TimerStopBallTimer(TObject *Sender)
+void __fastcall TFormMain::TimerCheckBallTimer(TObject *Sender)
 {
-	TImage* TestPlayer;
-	for (int i = 0; i < 3; i++) {
-		TestPlayer = Field.Team[0].Player[i].Img;
-		if (sqrt(((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y))*((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y)) + ((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))*((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))) <= TestPlayer->Width/4) {
-			Field.Ball.Speed = 0;
-		}
+	// Проверка на ГОЛ
+
+	// Проверка на выход из поля
+
+	if ((Field.Ball.CBall->Width/2 + Field.Ball.CBall->Position->X) < (56*PanelPlayArea->Width/1062))
+	{
+		Field.Ball.CBall->Position->X = BallDelta[0]*PanelPlayArea->Width - Field.Ball.CBall->Width/2;
+		Field.Ball.CBall->Position->Y = PanelPlayArea->Height/2 - Field.Ball.CBall->Height/2;
+		Field.Ball.Speed = 0;
+		Field.Ball.Degree = 0;
+		TimerMoveUser->Enabled = false;
+		Field.Team[0].DeletePlayer(0);
+		Field.Team[0].AddPlayer((GoalKeeperDelta[0]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'b');
+		TimerMoveUser->Enabled = true;
+		return;
+	} else if ((Field.Ball.CBall->Width/2 + Field.Ball.CBall->Position->X) > ((1062-56)*PanelPlayArea->Width/1062))
+	{
+		Field.Ball.CBall->Position->X = BallDelta[1]*PanelPlayArea->Width - Field.Ball.CBall->Width/2;
+		Field.Ball.CBall->Position->Y = PanelPlayArea->Height/2 - Field.Ball.CBall->Height/2;
+		Field.Ball.Speed = 0;
+		Field.Ball.Degree = 0;
+		TimerMoveUser->Enabled = false;
+		Field.Team[1].DeletePlayer(0);
+		Field.Team[1].AddPlayer((GoalKeeperDelta[1]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'o');
+		TimerMoveUser->Enabled = true;
+		return;
+    }
+
+	// Проверка на столкновение с игроком
+	for (int i = 0; i < 2; i++)
+	{
+		TImage* TestPlayer;
+		for (int j = 0; j < 3; j++) {
+			TestPlayer = Field.Team[i].Player[j].Img;
+			if (sqrt(((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y))*((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y)) + ((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))*((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))) <= TestPlayer->Width/4) {
+				Field.Ball.Speed = 0;
+				return;
+			}
+		}        // 182 274
 	}
 }
 //---------------------------------------------------------------------------
@@ -149,9 +202,13 @@ void __fastcall TFormMain::TimerStopBallTimer(TObject *Sender)
 void __fastcall TFormMain::FormShow(TObject *Sender)
 {
 	InitField();
-
-
 }
 //---------------------------------------------------------------------------
 
+
+void __fastcall TFormMain::FormCloseQuery(TObject *Sender, bool &CanClose)
+{
+	DestroyField();
+}
+//---------------------------------------------------------------------------
 
