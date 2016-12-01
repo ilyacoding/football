@@ -41,6 +41,7 @@ __published:	// IDE-managed Components
 	TLabel *LabelLevel2;
 	TLabel *LabelName2;
 	TImage *ImageUser2;
+	TImage *ImageBackground;
 	void __fastcall ToolBarPlayersResize(TObject *Sender);
 	void __fastcall ButtonProfileClick(TObject *Sender);
 	void __fastcall ButtonStartGameClick(TObject *Sender);

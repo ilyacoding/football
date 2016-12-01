@@ -10,7 +10,18 @@ object FormMenu: TFormMenu
   OnCreate = FormCreate
   OnCloseQuery = FormCloseQuery
   DesignerMasterStyle = 0
+  object ImageBackground: TImage
+    MultiResBitmap = <
+      item
+      end>
+    Align = Client
+    Size.Width = 872.000000000000000000
+    Size.Height = 321.000000000000000000
+    Size.PlatformDefault = False
+    WrapMode = Stretch
+  end
   object ButtonStartGame: TButton
+    Anchors = [akTop]
     Position.X = 336.000000000000000000
     Size.Width = 209.000000000000000000
     Size.Height = 33.000000000000000000
@@ -27,6 +38,7 @@ object FormMenu: TFormMenu
     Size.PlatformDefault = False
   end
   object LabelUser: TLabel
+    Anchors = [akTop, akRight]
     Position.X = 648.000000000000000000
     Position.Y = 8.000000000000000000
     Size.Width = 217.000000000000000000
@@ -34,6 +46,10 @@ object FormMenu: TFormMenu
     Size.PlatformDefault = False
   end
   object ButtonProfile: TButton
+    Anchors = [akTop]
+    DisableFocusEffect = True
+    StyledSettings = [Style]
+    Opacity = 0.800000011920929000
     Position.X = 48.000000000000000000
     Position.Y = 96.000000000000000000
     Size.Width = 180.000000000000000000
@@ -41,9 +57,13 @@ object FormMenu: TFormMenu
     Size.PlatformDefault = False
     TabOrder = 6
     Text = #1055#1088#1086#1092#1080#1083#1100
+    TextSettings.Font.Family = 'Segoe Print'
+    TextSettings.Font.Size = 20.000000000000000000
+    TextSettings.FontColor = claCoral
     OnClick = ButtonProfileClick
   end
   object ButtonTeam: TButton
+    Anchors = [akTop]
     Position.X = 248.000000000000000000
     Position.Y = 96.000000000000000000
     Size.Width = 180.000000000000000000
@@ -53,6 +73,9 @@ object FormMenu: TFormMenu
     Text = 'ButtonTeam'
   end
   object ButtonGlobStat: TButton
+    Anchors = [akTop]
+    StyledSettings = [Style]
+    Opacity = 0.800000011920929000
     Position.X = 448.000000000000000000
     Position.Y = 96.000000000000000000
     Size.Width = 180.000000000000000000
@@ -60,9 +83,13 @@ object FormMenu: TFormMenu
     Size.PlatformDefault = False
     TabOrder = 4
     Text = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
+    TextSettings.Font.Family = 'Segoe Print'
+    TextSettings.Font.Size = 20.000000000000000000
+    TextSettings.FontColor = claCoral
     OnClick = ButtonGlobStatClick
   end
   object ButtonInfo: TButton
+    Anchors = [akTop]
     Position.X = 648.000000000000000000
     Position.Y = 96.000000000000000000
     Size.Width = 180.000000000000000000
@@ -99,7 +126,7 @@ object FormMenu: TFormMenu
         StyledSettings = [Family, Style, FontColor]
         Position.X = 96.000000000000000000
         Position.Y = 40.000000000000000000
-        Size.Width = 193.000000000000000000
+        Size.Width = 185.000000000000000000
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 14.000000000000000000
@@ -108,7 +135,7 @@ object FormMenu: TFormMenu
         StyledSettings = [Family, Style, FontColor]
         Position.X = 96.000000000000000000
         Position.Y = 64.000000000000000000
-        Size.Width = 193.000000000000000000
+        Size.Width = 185.000000000000000000
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 14.000000000000000000

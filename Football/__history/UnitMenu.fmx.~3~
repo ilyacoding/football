@@ -1,0 +1,241 @@
+object FormMenu: TFormMenu
+  Left = 0
+  Top = 0
+  Caption = #1060#1091#1090#1073#1086#1083
+  ClientHeight = 410
+  ClientWidth = 872
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnCloseQuery = FormCloseQuery
+  DesignerMasterStyle = 0
+  object ImageBackground: TImage
+    MultiResBitmap = <
+      item
+      end>
+    Align = Client
+    Size.Width = 872.000000000000000000
+    Size.Height = 321.000000000000000000
+    Size.PlatformDefault = False
+    WrapMode = Stretch
+  end
+  object ButtonStartGame: TButton
+    Anchors = [akTop]
+    Position.X = 336.000000000000000000
+    Size.Width = 209.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = #1053#1072#1095#1072#1090#1100' '#1080#1075#1088#1091'!'
+    OnClick = ButtonStartGameClick
+  end
+  object LabelInfo: TLabel
+    Position.X = 48.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 289.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object LabelUser: TLabel
+    Anchors = [akTop, akRight]
+    Position.X = 648.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 217.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object ButtonProfile: TButton
+    Anchors = [akTop]
+    Position.X = 48.000000000000000000
+    Position.Y = 96.000000000000000000
+    Size.Width = 180.000000000000000000
+    Size.Height = 180.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    Text = #1055#1088#1086#1092#1080#1083#1100
+    OnClick = ButtonProfileClick
+  end
+  object ButtonTeam: TButton
+    Anchors = [akTop]
+    Position.X = 248.000000000000000000
+    Position.Y = 96.000000000000000000
+    Size.Width = 180.000000000000000000
+    Size.Height = 180.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    Text = 'ButtonTeam'
+  end
+  object ButtonGlobStat: TButton
+    Anchors = [akTop]
+    Position.X = 448.000000000000000000
+    Position.Y = 96.000000000000000000
+    Size.Width = 180.000000000000000000
+    Size.Height = 180.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    Text = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
+    OnClick = ButtonGlobStatClick
+  end
+  object ButtonInfo: TButton
+    Anchors = [akTop]
+    Position.X = 648.000000000000000000
+    Position.Y = 96.000000000000000000
+    Size.Width = 180.000000000000000000
+    Size.Height = 180.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'ButtonInfo'
+  end
+  object ToolBarPlayers: TToolBar
+    Align = Bottom
+    Position.Y = 321.000000000000000000
+    Size.Width = 872.000000000000000000
+    Size.Height = 89.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    OnResize = ToolBarPlayersResize
+    object PanelPlayer0: TPanel
+      Align = FitLeft
+      Size.Width = 289.000000000000000000
+      Size.Height = 89.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object LabelName0: TLabel
+        StyledSettings = [Family, FontColor]
+        Position.X = 96.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 185.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {04040000000000000004000000}
+      end
+      object LabelLevel0: TLabel
+        StyledSettings = [Family, Style, FontColor]
+        Position.X = 96.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 185.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+      end
+      object LabelSpeed0: TLabel
+        StyledSettings = [Family, Style, FontColor]
+        Position.X = 96.000000000000000000
+        Position.Y = 64.000000000000000000
+        Size.Width = 185.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+      end
+      object ImageUser0: TImage
+        MultiResBitmap = <
+          item
+          end>
+        Position.X = 8.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 73.000000000000000000
+        Size.Height = 73.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object PanelPlayer1: TPanel
+      Align = Fit
+      Size.Width = 289.000000000000000000
+      Size.Height = 89.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object LabelSpeed1: TLabel
+        StyledSettings = [Family, Style, FontColor]
+        Position.X = 96.000000000000000000
+        Position.Y = 64.000000000000000000
+        Size.Width = 193.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+      end
+      object LabelLevel1: TLabel
+        StyledSettings = [Family, Style, FontColor]
+        Position.X = 96.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 193.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+      end
+      object LabelName1: TLabel
+        StyledSettings = [Family, FontColor]
+        Position.X = 96.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 193.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {04040000000000000004000000}
+      end
+      object ImageUser1: TImage
+        MultiResBitmap = <
+          item
+          end>
+        Position.X = 8.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 73.000000000000000000
+        Size.Height = 73.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object PanelPlayer2: TPanel
+      Align = FitRight
+      Position.X = 584.000000000000000000
+      Size.Width = 288.000000000000000000
+      Size.Height = 89.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object LabelSpeed2: TLabel
+        StyledSettings = [Family, Style, FontColor]
+        Position.X = 96.000000000000000000
+        Position.Y = 64.000000000000000000
+        Size.Width = 193.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+      end
+      object LabelLevel2: TLabel
+        StyledSettings = [Family, Style, FontColor]
+        Position.X = 96.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 193.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+      end
+      object LabelName2: TLabel
+        StyledSettings = [Family, FontColor]
+        Position.X = 96.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 193.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {04040000000000000004000000}
+      end
+      object ImageUser2: TImage
+        MultiResBitmap = <
+          item
+          end>
+        Position.X = 8.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 73.000000000000000000
+        Size.Height = 73.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+  end
+  object TimerCheckUserLogin: TTimer
+    Interval = 500
+    OnTimer = TimerCheckUserLoginTimer
+    Left = 800
+    Top = 40
+  end
+end

@@ -97,6 +97,7 @@ void __fastcall TFormMenu::TimerCheckUserLoginTimer(TObject *Sender)
 
 void __fastcall TFormMenu::FormCreate(TObject *Sender)
 {
+	ImageBackground->Bitmap->LoadFromFile("img/menu-bg.jpg");
 	PanelPlayer0->Width = ToolBarPlayers->Width/3;
 	PanelPlayer1->Width = ToolBarPlayers->Width/3;
 	PanelPlayer2->Width = ToolBarPlayers->Width/3;

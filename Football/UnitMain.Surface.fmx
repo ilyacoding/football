@@ -4,7 +4,7 @@ inherited FormMain_Surface: TFormMain_Surface
   DesignerMasterStyle = 0
   inherited ImageBackground: TImage
     Size.Width = 1080.000000000000000000
-    Size.Height = 1895.000000000000000000
+    Size.Height = 1920.000000000000000000
     inherited Ball: TCircle
       RotationCenter.X = 0.000000000000000000
       Stroke.Thickness = 0.200000002980232200
@@ -12,15 +12,9 @@ inherited FormMain_Surface: TFormMain_Surface
   end
   inherited PanelPlayArea: TPanel
     Size.Width = 1080.000000000000000000
-    Size.Height = 1895.000000000000000000
+    Size.Height = 1920.000000000000000000
   end
   inherited LabelFPS: TLabel
     TextSettings.Font.StyleExt = {00070000000000000004000000}
-  end
-  inherited ToolBarTop: TToolBar
-    Size.Width = 1080.000000000000000000
-    inherited MenuBar1: TMenuBar
-      Size.Width = 1080.000000000000000000
-    end
   end
 end
