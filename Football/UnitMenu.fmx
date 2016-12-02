@@ -21,13 +21,15 @@ object FormMenu: TFormMenu
     WrapMode = Stretch
   end
   object ButtonStartGame: TButton
-    Anchors = [akTop]
-    Position.X = 336.000000000000000000
-    Size.Width = 209.000000000000000000
-    Size.Height = 33.000000000000000000
+    StyledSettings = [FontColor]
+    Position.X = 264.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 49.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     Text = #1053#1072#1095#1072#1090#1100' '#1080#1075#1088#1091'!'
+    TextSettings.Font.Family = 'Segoe Print'
+    TextSettings.Font.Size = 30.000000000000000000
     OnClick = ButtonStartGameClick
   end
   object LabelInfo: TLabel
@@ -90,13 +92,18 @@ object FormMenu: TFormMenu
   end
   object ButtonInfo: TButton
     Anchors = [akTop]
+    StyledSettings = [Style]
     Position.X = 648.000000000000000000
     Position.Y = 96.000000000000000000
     Size.Width = 180.000000000000000000
     Size.Height = 180.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 3
-    Text = 'ButtonInfo'
+    Text = #1054#1073' '#1080#1075#1088#1077
+    TextSettings.Font.Family = 'Segoe Print'
+    TextSettings.Font.Size = 20.000000000000000000
+    TextSettings.FontColor = claCoral
+    OnClick = ButtonInfoClick
   end
   object ToolBarPlayers: TToolBar
     Align = Bottom
@@ -116,7 +123,7 @@ object FormMenu: TFormMenu
         StyledSettings = [Family, FontColor]
         Position.X = 96.000000000000000000
         Position.Y = 8.000000000000000000
-        Size.Width = 185.000000000000000000
+        Size.Width = 193.000000000000000000
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 16.000000000000000000
@@ -126,7 +133,7 @@ object FormMenu: TFormMenu
         StyledSettings = [Family, Style, FontColor]
         Position.X = 96.000000000000000000
         Position.Y = 40.000000000000000000
-        Size.Width = 185.000000000000000000
+        Size.Width = 193.000000000000000000
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 14.000000000000000000
@@ -135,7 +142,7 @@ object FormMenu: TFormMenu
         StyledSettings = [Family, Style, FontColor]
         Position.X = 96.000000000000000000
         Position.Y = 64.000000000000000000
-        Size.Width = 185.000000000000000000
+        Size.Width = 193.000000000000000000
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 14.000000000000000000

@@ -6,6 +6,9 @@ inherited FormMenu_Surface: TFormMenu_Surface
     Size.Width = 1080.000000000000000000
     Size.Height = 1831.000000000000000000
   end
+  inherited ButtonStartGame: TButton
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+  end
   inherited LabelInfo: TLabel
     Anchors = [akTop]
   end

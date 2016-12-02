@@ -3,10 +3,11 @@
 #include <fmx.h>
 #pragma hdrstop
 
+#include "UnitMenu.h"
 #include "UnitAuth.h"
 #include "UnitMain.h"
 #include "UnitStat.h"
-#include "UnitMenu.h"
+#include "UnitInfo.h"
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -117,6 +118,12 @@ void __fastcall TFormMenu::FormCloseQuery(TObject *Sender, bool &CanClose)
 void __fastcall TFormMenu::ButtonGlobStatClick(TObject *Sender)
 {
 	FormStat->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::ButtonInfoClick(TObject *Sender)
+{
+	FormInfo->ShowModal();
 }
 //---------------------------------------------------------------------------
 
