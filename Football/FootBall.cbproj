@@ -160,6 +160,12 @@
             <DependentOn>UnitAuth.h</DependentOn>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
+        <CppCompile Include="UnitInfo.cpp">
+            <Form>FormInfo</Form>
+            <FormType>fmx</FormType>
+            <DependentOn>UnitInfo.h</DependentOn>
+            <BuildOrder>16</BuildOrder>
+        </CppCompile>
         <CppCompile Include="UnitMain.cpp">
             <Form>FormMain</Form>
             <FormType>fmx</FormType>
@@ -178,11 +184,14 @@
             <DependentOn>UnitStat.h</DependentOn>
             <BuildOrder>7</BuildOrder>
         </CppCompile>
+        <FormResources Include="UnitMenu.fmx"/>
+        <FormResources Include="UnitMenu.Windows.fmx"/>
+        <FormResources Include="UnitMenu.Surface.fmx"/>
+        <FormResources Include="UnitStat.fmx"/>
         <FormResources Include="UnitAuth.fmx"/>
         <FormResources Include="UnitMain.fmx"/>
         <FormResources Include="UnitMain.Surface.fmx"/>
-        <FormResources Include="UnitStat.fmx"/>
-        <FormResources Include="UnitMenu.fmx"/>
+        <FormResources Include="UnitInfo.fmx"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

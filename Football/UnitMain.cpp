@@ -16,6 +16,8 @@ TFormMain *FormMain;
 TField Field;
 TGame Game;
 UnicodeString Host;
+const int MainID = 1;
+const int SecondID = 1 - MainID;
 
 double GoalKeeperDelta[2] = { (double)88/1062, (double)(1062 - 88)/1062};
 double AttackerDelta[2] = { (double)472/1062, (double)(1062 - 472)/1062};
@@ -84,19 +86,22 @@ void __fastcall TFormMain::DestroyField()
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::TimerMoveUserTimer(TObject *Sender)
 {
-	if (Field.CalcDistance(Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->X + Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Width/2, Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->Y + Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Height/2, Field.Team[0].Player[Field.Team[0].CurrPlayer].mouseX, Field.Team[0].Player[Field.Team[0].CurrPlayer].mouseY) > 3)
+	for (int TID = 0; TID < 1; TID++)
 	{
-		float Degree = Field.CalcDegree(Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->X + Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Width/2, Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->Y + Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Height/2, Field.Team[0].Player[Field.Team[0].CurrPlayer].mouseX, Field.Team[0].Player[Field.Team[0].CurrPlayer].mouseY);
-		for (int j = 0; j <= Field.Team[0].Player[Field.Team[0].CurrPlayer].Speed; j++)
+		if (Field.CalcDistance(Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Position->X + Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Width/2, Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Position->Y + Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Height/2, Field.Team[TID].Player[Field.Team[TID].CurrPlayer].mouseX, Field.Team[TID].Player[Field.Team[TID].CurrPlayer].mouseY) > 3)
 		{
-			Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->X += (cos(Degree * pi / 180) * 1);
-			Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->Y -= (sin(Degree * pi / 180) * 1);
+			float Degree = Field.CalcDegree(Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Position->X + Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Width/2, Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Position->Y + Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Height/2, Field.Team[TID].Player[Field.Team[TID].CurrPlayer].mouseX, Field.Team[TID].Player[Field.Team[TID].CurrPlayer].mouseY);
+			for (int j = 0; j <= Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Speed; j++)
+			{
+				Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Position->X += (cos(Degree * pi / 180) * 1);
+				Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Position->Y -= (sin(Degree * pi / 180) * 1);
 
-			Field.Team[0].Player[Field.Team[0].CurrPlayer].Txt->Position->X += (cos(Degree * pi / 180) * 1);
-			Field.Team[0].Player[Field.Team[0].CurrPlayer].Txt->Position->Y -= (sin(Degree * pi / 180) * 1);
-            Field.Background->Repaint();
+				Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Txt->Position->X += (cos(Degree * pi / 180) * 1);
+				Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Txt->Position->Y -= (sin(Degree * pi / 180) * 1);
+				ImageBackground->Repaint();
+			}
 		}
-    }
+	}
 }
 
 //---------------------------------------------------------------------------
@@ -133,12 +138,73 @@ void __fastcall TFormMain::FormKeyDown(TObject *Sender, WORD &Key, System::WideC
 		  TShiftState Shift)
 {
 	Label1->Text = KeyChar;
-	if ((KeyChar == 'w') && (Field.CalcDistance(Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y, Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->X + Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Width/2, Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->Y + Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Height/2) <= Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Height)) {
-		Field.Ball.Speed += 3;
-		Field.Ball.Degree = Field.CalcDegree(Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Width/2 + Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->X, Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Height/2 + Field.Team[0].Player[Field.Team[0].CurrPlayer].Img->Position->Y, Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y);
-	} else if (isdigit(KeyChar) && (KeyChar - '0' <= 3)) {
-		Field.Team[0].Player[Field.Team[0].CurrPlayer].Speed = 2;
-		Field.Team[0].CurrPlayer = KeyChar - '0' - 1;
+
+	// Обработка удара Team0
+	if (isalpha(KeyChar))
+	{
+		double dWidth = Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Width/2;
+		double dHeight = Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Height/2;
+		double dX = Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Position->X;
+		double dY = Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Position->Y;
+		int dSpeed;
+
+		(Shift.Contains(System_Classes__1::ssShift)) ? (dSpeed = 5) : (dSpeed = 2);
+
+		switch (KeyChar) {
+			case 'w': case 'W':
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].mouseX = dX + dWidth + 0.001;
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].mouseY = 2;
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Speed = dSpeed;
+			break;
+
+			case 's': case 'S':
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].mouseX = dX + dWidth + 0.001;
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].mouseY = ImageBackground->Height;
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Speed = dSpeed;
+			break;
+
+			case 'a': case 'A':
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].mouseX = 2;
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].mouseY = dY + dHeight + 0.001;
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Speed = dSpeed;
+			break;
+
+			case 'd': case 'D':
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].mouseX = ImageBackground->Width;
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].mouseY = dY + dHeight + 0.001;
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Speed = dSpeed;
+			break;
+
+			case 'q': case 'Q':
+            	Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Speed = 0;
+			break;
+		}
+
+	} else if (isdigit(KeyChar)) {
+		KeyChar -= '0';
+		switch(KeyChar) {
+			case 1: case 2: case 3:
+				if (KeyChar - 1 == Field.Team[MainID].CurrPlayer) {
+					if ((Field.CalcDistance(Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y, Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Position->X + Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Width/2, Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Position->Y + Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Height/2) <= Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Height)) {
+						Field.Ball.Speed += 3;
+						Field.Ball.Degree = Field.CalcDegree(Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Width/2 + Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Position->X, Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Height/2 + Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Position->Y, Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y);
+					}
+				}
+				Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Speed = 2;
+				Field.Team[MainID].CurrPlayer = KeyChar - 1;
+			break;
+
+			case 7: case 8: case 9:
+				if (KeyChar - 7 == Field.Team[SecondID].CurrPlayer) {
+					if ((Field.CalcDistance(Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y, Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Position->X + Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Width/2, Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Position->Y + Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Height/2) <= Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Height)) {
+						Field.Ball.Speed += 3;
+						Field.Ball.Degree = Field.CalcDegree(Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Width/2 + Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Position->X, Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Height/2 + Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Position->Y, Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y);
+					}
+				}
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Speed = 2;
+				Field.Team[SecondID].CurrPlayer = KeyChar - 7;
+			break;
+		}
 	}
 }
 //---------------------------------------------------------------------------
@@ -146,11 +212,10 @@ void __fastcall TFormMain::FormKeyDown(TObject *Sender, WORD &Key, System::WideC
 void __fastcall TFormMain::PanelPlayAreaMouseMove(TObject *Sender, TShiftState Shift, float X,
 		  float Y)
 {
-	Field.Team[0].Player[Field.Team[0].CurrPlayer].mouseX = X;
-	Field.Team[0].Player[Field.Team[0].CurrPlayer].mouseY = Y;
-	Field.Team[0].Player[Field.Team[0].CurrPlayer].Speed = 5;
-	Label2->Text = ToStr(X).c_str();
-	Label3->Text = ToStr(Y).c_str();
+	Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].mouseX = X;
+	Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].mouseY = Y;
+	Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Speed = 5;
+
 }
 //---------------------------------------------------------------------------
 
@@ -210,5 +275,6 @@ void __fastcall TFormMain::FormCloseQuery(TObject *Sender, bool &CanClose)
 {
 	DestroyField();
 }
+
 //---------------------------------------------------------------------------
 

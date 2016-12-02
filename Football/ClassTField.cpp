@@ -13,6 +13,8 @@ float TField::CalcDegree(float FromX, float FromY, float ToX, float ToY)
 		return ceil(atan(fabs(ToY - (FromY))/fabs(ToX - (FromX))) * 180 / pi);
 	} else if ((ToX - (FromX) < 0) && (ToY - (FromY) < 0)) {// X- Y-
 		return 180 - ceil(atan(fabs(ToY - (FromY))/fabs(ToX - (FromX))) * 180 / pi);
+	} else if ((ToX - (FromX) == 0) && (ToY - (FromY) < 0)) {// X- Y+
+		return 180;
 	} else {
 		return 0;
 	}

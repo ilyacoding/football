@@ -287,11 +287,6 @@ object FormMain: TFormMain
       Stroke.Bitmap.WrapMode = TileStretch
       Stroke.Kind = Bitmap
     end
-    object Label2: TLabel
-      Position.X = 8.000000000000000000
-      Position.Y = 40.000000000000000000
-      Text = 'Label2'
-    end
   end
   object PanelPlayArea: TPanel
     Align = Client
@@ -311,19 +306,6 @@ object FormMain: TFormMain
     TextSettings.FontColor = claCrimson
     Text = '60 fps'
   end
-  object Label1: TLabel
-    Position.X = 8.000000000000000000
-    Position.Y = 48.000000000000000000
-    Size.Width = 120.000000000000000000
-    Size.Height = 17.000000000000000000
-    Size.PlatformDefault = False
-    Text = 'Label1'
-  end
-  object Label3: TLabel
-    Position.X = 8.000000000000000000
-    Position.Y = 64.000000000000000000
-    Text = 'Label3'
-  end
   object ToolBarMenu: TToolBar
     Size.Width = 1065.000000000000000000
     Size.Height = 40.000000000000000000
@@ -340,6 +322,24 @@ object FormMain: TFormMain
       TextSettings.Font.StyleExt = {00070000000000000004000000}
       TextSettings.FontColor = claPurple
       Text = #1057#1095#1105#1090':'
+    end
+    object Label2: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 7.000000000000000000
+      Text = 'Label2'
+    end
+    object Label3: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 23.000000000000000000
+      Text = 'Label3'
+    end
+    object Label1: TLabel
+      Position.X = 344.000000000000000000
+      Position.Y = 7.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Label1'
     end
   end
 end
