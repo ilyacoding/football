@@ -51,6 +51,9 @@ __published:	// IDE-managed Components
 	TLabel *Label3;
 	TToolBar *ToolBarMenu;
 	TLabel *LabelCount;
+	TTimer *TimerCountDown;
+	TTimer *TimerAI;
+	TTimer *TimerMoveAI;
 	void __fastcall TimerMoveUserTimer(TObject *Sender);
 	void __fastcall TimerMoveBallTimer(TObject *Sender);
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
@@ -58,11 +61,17 @@ __published:	// IDE-managed Components
 	void __fastcall PanelPlayAreaMouseMove(TObject *Sender, TShiftState Shift, float X, float Y);
 	void __fastcall TimerCheckBallTimer(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
-	void __fastcall InitField();
-	void __fastcall DestroyField();
 	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
+	void __fastcall TimerCountDownTimer(TObject *Sender);
+	void __fastcall TimerAITimer(TObject *Sender);
+	void __fastcall TimerMoveAITimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
+	void __fastcall AITick();
+	void __fastcall InitField();
+	void __fastcall DestroyField();
+	void __fastcall PrintCount();
+	void __fastcall InitTimer(int Count);
 	TImage *tmpImage;
 	TLabel *tmpLabel;
 	__fastcall TFormMain(TComponent* Owner);

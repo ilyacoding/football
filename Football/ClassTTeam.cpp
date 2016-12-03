@@ -18,7 +18,7 @@ bool TTeam::AddPlayer(float PosX, float PosY, char ImgColor)
 	{
 		int i = 0;
 		while (Player[i].InGame) i++;
-		Player[i].Speed = 0;
+		Player[i].Speed = -1;
 		Player[i].mouseX = 0;
 		Player[i].mouseY = 0;
 		Player[i].InGame = true;

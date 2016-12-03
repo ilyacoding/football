@@ -27,9 +27,9 @@ object FormMain: TFormMain
   end
   object TimerCheckBall: TTimer
     Enabled = False
-    Interval = 10
+    Interval = 20
     OnTimer = TimerCheckBallTimer
-    Left = 920
+    Left = 832
     Top = 56
   end
   object ImageBackground: TImage
@@ -312,16 +312,15 @@ object FormMain: TFormMain
     Size.PlatformDefault = False
     TabOrder = 15
     object LabelCount: TLabel
-      Anchors = [akTop]
+      Align = HorzCenter
       StyledSettings = [Family]
-      Position.X = 400.000000000000000000
-      Size.Width = 169.000000000000000000
-      Size.Height = 41.000000000000000000
+      Position.X = 509.000000000000000000
+      Size.Width = 46.000000000000000000
+      Size.Height = 40.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 30.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
       TextSettings.FontColor = claPurple
-      Text = #1057#1095#1105#1090':'
     end
     object Label2: TLabel
       Position.X = 8.000000000000000000
@@ -334,12 +333,32 @@ object FormMain: TFormMain
       Text = 'Label3'
     end
     object Label1: TLabel
-      Position.X = 344.000000000000000000
+      Position.X = 136.000000000000000000
       Position.Y = 7.000000000000000000
       Size.Width = 120.000000000000000000
       Size.Height = 17.000000000000000000
       Size.PlatformDefault = False
       Text = 'Label1'
     end
+  end
+  object TimerCountDown: TTimer
+    Enabled = False
+    OnTimer = TimerCountDownTimer
+    Left = 736
+    Top = 8
+  end
+  object TimerAI: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = TimerAITimer
+    Left = 736
+    Top = 56
+  end
+  object TimerMoveAI: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = TimerMoveAITimer
+    Left = 920
+    Top = 56
   end
 end
