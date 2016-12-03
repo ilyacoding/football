@@ -31,8 +31,22 @@ __fastcall TFormMain::TFormMain(TComponent* Owner)
 {
 }
 
+void __fastcall TFormMain::InitTimer(int Count)
+{
+	Game.TimerCount = Count;
+	Game.CanMove = false;
+	TimerCountDown->Enabled = true;
+}
+
+void __fastcall TFormMain::PrintCount()
+{
+	LabelCount->Text = (ToStr(Game.Count[0]) + ":" + ToStr(Game.Count[1])).c_str();
+}
+
 void __fastcall TFormMain::InitField()
 {
+	InitTimer(2);
+
 	// Background Start
 	Field.Background = ImageBackground;
 	Field.Background->Bitmap->LoadFromFile("img/field.jpg");
@@ -55,12 +69,17 @@ void __fastcall TFormMain::InitField()
 	Field.Team[1].AddPlayer((GoalKeeperDelta[1]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'o');
 	Field.Team[1].AddPlayer((AttackerDelta[1]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'o');
 	Field.Team[1].AddPlayer((DefenderDelta[1]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'o');
+	// Curr
+	Field.Team[0].CurrPlayer = 1;
+	Field.Team[1].CurrPlayer = 1;
 	// Players end
 
 	// Timers Start
 	TimerMoveBall->Enabled = true;
 	TimerMoveUser->Enabled = true;
+	TimerMoveAI->Enabled = true;
 	TimerCheckBall->Enabled = true;
+	TimerAI->Enabled = true;
 	// Timers end
 }
 
@@ -79,15 +98,17 @@ void __fastcall TFormMain::DestroyField()
 	// Timers Start
 	TimerMoveBall->Enabled = false;
 	TimerMoveUser->Enabled = false;
+	TimerMoveAI->Enabled = false;
 	TimerCheckBall->Enabled = false;
+	TimerAI->Enabled = false;
 	// Timers end
 }
 
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::TimerMoveUserTimer(TObject *Sender)
 {
-	for (int TID = 0; TID < 1; TID++)
-	{
+	if (Game.CanMove) {
+		int TID = 1;
 		if (Field.CalcDistance(Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Position->X + Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Width/2, Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Position->Y + Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Height/2, Field.Team[TID].Player[Field.Team[TID].CurrPlayer].mouseX, Field.Team[TID].Player[Field.Team[TID].CurrPlayer].mouseY) > 3)
 		{
 			float Degree = Field.CalcDegree(Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Position->X + Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Width/2, Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Position->Y + Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Height/2, Field.Team[TID].Player[Field.Team[TID].CurrPlayer].mouseX, Field.Team[TID].Player[Field.Team[TID].CurrPlayer].mouseY);
@@ -95,10 +116,31 @@ void __fastcall TFormMain::TimerMoveUserTimer(TObject *Sender)
 			{
 				Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Position->X += (cos(Degree * pi / 180) * 1);
 				Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Img->Position->Y -= (sin(Degree * pi / 180) * 1);
-
-				Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Txt->Position->X += (cos(Degree * pi / 180) * 1);
+						Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Txt->Position->X += (cos(Degree * pi / 180) * 1);
 				Field.Team[TID].Player[Field.Team[TID].CurrPlayer].Txt->Position->Y -= (sin(Degree * pi / 180) * 1);
 				ImageBackground->Repaint();
+			}
+		}
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMain::TimerMoveAITimer(TObject *Sender)
+{
+	if (Game.CanMove) {
+		int TID = 0;
+		for (int i = 0; i < 3; i++) {
+			if (Field.CalcDistance(Field.Team[TID].Player[i].Img->Position->X + Field.Team[TID].Player[i].Img->Width/2, Field.Team[TID].Player[i].Img->Position->Y + Field.Team[TID].Player[i].Img->Height/2, Field.Team[TID].Player[i].mouseX, Field.Team[TID].Player[i].mouseY) > 3)
+			{
+				float Degree = Field.CalcDegree(Field.Team[TID].Player[i].Img->Position->X + Field.Team[TID].Player[i].Img->Width/2, Field.Team[TID].Player[i].Img->Position->Y + Field.Team[TID].Player[i].Img->Height/2, Field.Team[TID].Player[i].mouseX, Field.Team[TID].Player[i].mouseY);
+				for (int j = 0; j <= Field.Team[TID].Player[i].Speed; j++)
+				{
+					Field.Team[TID].Player[i].Img->Position->X += (cos(Degree * pi / 180) * 1);
+					Field.Team[TID].Player[i].Img->Position->Y -= (sin(Degree * pi / 180) * 1);
+					Field.Team[TID].Player[i].Txt->Position->X += (cos(Degree * pi / 180) * 1);
+					Field.Team[TID].Player[i].Txt->Position->Y -= (sin(Degree * pi / 180) * 1);
+					ImageBackground->Repaint();
+				}
 			}
 		}
 	}
@@ -108,29 +150,59 @@ void __fastcall TFormMain::TimerMoveUserTimer(TObject *Sender)
 
 void __fastcall TFormMain::TimerMoveBallTimer(TObject *Sender)
 {
-	if (Field.Ball.Speed > 0)
+	if (Game.CanMove)
 	{
-		for (int i = 0; i < (Field.Ball.Speed - Field.Ball.Accelerate); i++)
+		if (Field.Ball.Speed > 0)
 		{
-			if (!((cos(int(Field.Ball.Degree) * pi / 180) * 1) + Ball->Position->X + Ball->Width/2 < ImageBackground->Width) || !((cos(int(Field.Ball.Degree) * pi / 180) * 1) + Ball->Position->X + Ball->Width/2 > 0))
+			for (int i = 0; i < (Field.Ball.Speed - Field.Ball.Accelerate); i++)
 			{
-				// Отражение на 180
-				Field.Ball.Degree = 180 - Field.Ball.Degree;
-				Field.Ball.Speed *= 0.8;
+				if (!((cos(int(Field.Ball.Degree) * pi / 180) * 1) + Ball->Position->X + Ball->Width/2 < ImageBackground->Width) || !((cos(int(Field.Ball.Degree) * pi / 180) * 1) + Ball->Position->X + Ball->Width/2 > 0))
+				{
+					// Отражение на 180
+					Field.Ball.Degree = 180 - Field.Ball.Degree;
+					Field.Ball.Speed *= 0.8;
+				}
+				Ball->Position->X += (cos(Field.Ball.Degree * pi / 180) * 1);
+				if (!(Ball->Position->Y + Ball->Height/2 - (sin(int(Field.Ball.Degree) * pi / 180) * 1) < ImageBackground->Height) || !(Ball->Position->Y + Ball->Height/2 - (sin(int(Field.Ball.Degree) * pi / 180) * 1) > 0))
+				{
+					// Отражение на 180
+					Field.Ball.Degree = (180 - Field.Ball.Degree) * 2 + Field.Ball.Degree;
+					Field.Ball.Speed *= 0.8;
+				}
+				Ball->Position->Y -= (sin(Field.Ball.Degree * pi / 180) * 1);
+				Ball->RotationAngle += 2 * ((cos(Field.Ball.Degree * pi / 180) * 1) - (sin(Field.Ball.Degree * pi / 180) * 1));
+				Field.Ball.Speed -= Field.Ball.Accelerate;
+				Field.Background->Repaint();
 			}
-			Ball->Position->X += (cos(Field.Ball.Degree * pi / 180) * 1);
-			if (!(Ball->Position->Y + Ball->Height/2 - (sin(int(Field.Ball.Degree) * pi / 180) * 1) < ImageBackground->Height) || !(Ball->Position->Y + Ball->Height/2 - (sin(int(Field.Ball.Degree) * pi / 180) * 1) > 0))
-			{
-				// Отражение на 180
-				Field.Ball.Degree = (180 - Field.Ball.Degree) * 2 + Field.Ball.Degree;
-				Field.Ball.Speed *= 0.8;
-			}
-			Ball->Position->Y -= (sin(Field.Ball.Degree * pi / 180) * 1);
-			Ball->RotationAngle += 2 * ((cos(Field.Ball.Degree * pi / 180) * 1) - (sin(Field.Ball.Degree * pi / 180) * 1));
-			Field.Ball.Speed -= Field.Ball.Accelerate;
-			Field.Background->Repaint();
 		}
 	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMain::TimerAITimer(TObject *Sender)
+{
+	if (Game.CanMove)
+	{
+		double BallX = Ball->Position->X + Ball->Width/2;
+		double BallY = Ball->Position->Y + Ball->Height/2;
+		double PlayX = Field.Team[SecondID].Player[1].Img->Position->X + Field.Team[SecondID].Player[1].Img->Width/2;
+		double PlayY = Field.Team[SecondID].Player[1].Img->Position->Y + Field.Team[SecondID].Player[1].Img->Height/2;
+		if ((Field.CalcDistance(Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y, Field.Team[SecondID].Player[1].Img->Position->X + Field.Team[SecondID].Player[1].Img->Width/2, Field.Team[SecondID].Player[1].Img->Position->Y + Field.Team[SecondID].Player[1].Img->Height/2) <= 12)) {
+			Field.Ball.Speed += 3;
+			Field.Ball.Degree = Field.CalcDegree(BallX, BallY, ((1062 - 54)*PanelPlayArea->Width/1062), ((274 + rand() % 50 + 1)*PanelPlayArea->Height/545));
+			//return;
+			//Field.Ball.Degree = Field.CalcDegree(Field.Team[SecondID].Player[1].Img->Width/2 + Field.Team[SecondID].Player[1].Img->Position->X, Field.Team[SecondID].Player[1].Img->Height/2 + Field.Team[SecondID].Player[1].Img->Position->Y, Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y);
+		}
+		if (Field.CalcDistance(BallX, BallY, PlayX, PlayY) > 5)
+		{
+			Field.Team[SecondID].Player[1].Speed = 3;
+			Field.Team[SecondID].Player[1].mouseX = BallX;
+			Field.Team[SecondID].Player[1].mouseY = BallY;
+		} else {
+			Field.Team[SecondID].Player[1].Speed = -1;
+        }
+
+    }
 }
 //---------------------------------------------------------------------------
 
@@ -139,16 +211,17 @@ void __fastcall TFormMain::FormKeyDown(TObject *Sender, WORD &Key, System::WideC
 {
 	Label1->Text = KeyChar;
 
-	// Обработка удара Team0
+	if (KeyChar == vkShift)
+		Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Speed = 5;
+
+	// Обработка ускорения
 	if (isalpha(KeyChar))
 	{
 		double dWidth = Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Width/2;
 		double dHeight = Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Height/2;
 		double dX = Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Position->X;
 		double dY = Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Img->Position->Y;
-		int dSpeed;
-
-		(Shift.Contains(System_Classes__1::ssShift)) ? (dSpeed = 5) : (dSpeed = 2);
+		int dSpeed = 5;
 
 		switch (KeyChar) {
 			case 'w': case 'W':
@@ -176,7 +249,11 @@ void __fastcall TFormMain::FormKeyDown(TObject *Sender, WORD &Key, System::WideC
 			break;
 
 			case 'q': case 'Q':
-            	Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Speed = 0;
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Speed = 0;
+			break;
+
+			case 'e': case 'E':
+				Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Speed = -1;
 			break;
 		}
 
@@ -188,6 +265,8 @@ void __fastcall TFormMain::FormKeyDown(TObject *Sender, WORD &Key, System::WideC
 					if ((Field.CalcDistance(Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y, Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Position->X + Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Width/2, Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Position->Y + Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Height/2) <= Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Height)) {
 						Field.Ball.Speed += 3;
 						Field.Ball.Degree = Field.CalcDegree(Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Width/2 + Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Position->X, Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Height/2 + Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Position->Y, Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y);
+						Ball->Position->X += 5;
+
 					}
 				}
 				Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Speed = 2;
@@ -215,18 +294,41 @@ void __fastcall TFormMain::PanelPlayAreaMouseMove(TObject *Sender, TShiftState S
 	Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].mouseX = X;
 	Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].mouseY = Y;
 	Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Speed = 5;
-
+	Label2->Text = ToStr(X).c_str();
+	Label3->Text = ToStr(Y).c_str();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TFormMain::TimerCheckBallTimer(TObject *Sender)
 {
 	// Проверка на ГОЛ
+	double BallX = Field.Ball.CBall->Width/2 + Field.Ball.CBall->Position->X;
+	double BallY = Field.Ball.CBall->Height/2 + Field.Ball.CBall->Position->Y;
+	if ((BallX < (54*PanelPlayArea->Width/1062)) && (BallY > (236*PanelPlayArea->Height/545)) && (BallY < (311*PanelPlayArea->Height/545)))
+	{
+		Game.GoalTo(1);
+		DestroyField();
+		InitField();
+		Field.Ball.Speed = 0;
+		Field.Ball.Degree = 0;
+		PrintCount();
+		return;
+	} else if ((BallX > ((1062 - 54)*PanelPlayArea->Width/1062)) && (BallY > (236*PanelPlayArea->Height/545)) && (BallY < (311*PanelPlayArea->Height/545)))
+	{
+		Game.GoalTo(2);
+		DestroyField();
+		InitField();
+		Field.Ball.Speed = 0;
+		Field.Ball.Degree = 0;
+		PrintCount();
+		return;
+	}
+
 
 	// Проверка на выход из поля
-
-	if ((Field.Ball.CBall->Width/2 + Field.Ball.CBall->Position->X) < (56*PanelPlayArea->Width/1062))
+	if ((Field.Ball.CBall->Width/2 + Field.Ball.CBall->Position->X) < (54*PanelPlayArea->Width/1062))
 	{
+		InitTimer(3);
 		Field.Ball.CBall->Position->X = BallDelta[0]*PanelPlayArea->Width - Field.Ball.CBall->Width/2;
 		Field.Ball.CBall->Position->Y = PanelPlayArea->Height/2 - Field.Ball.CBall->Height/2;
 		Field.Ball.Speed = 0;
@@ -236,8 +338,9 @@ void __fastcall TFormMain::TimerCheckBallTimer(TObject *Sender)
 		Field.Team[0].AddPlayer((GoalKeeperDelta[0]*PanelPlayArea->Width) - PlayerSize/2, (PanelPlayArea->Height - PlayerSize)/2, 'b');
 		TimerMoveUser->Enabled = true;
 		return;
-	} else if ((Field.Ball.CBall->Width/2 + Field.Ball.CBall->Position->X) > ((1062-56)*PanelPlayArea->Width/1062))
+	} else if ((Field.Ball.CBall->Width/2 + Field.Ball.CBall->Position->X) > ((1062-54)*PanelPlayArea->Width/1062))
 	{
+		InitTimer(3);
 		Field.Ball.CBall->Position->X = BallDelta[1]*PanelPlayArea->Width - Field.Ball.CBall->Width/2;
 		Field.Ball.CBall->Position->Y = PanelPlayArea->Height/2 - Field.Ball.CBall->Height/2;
 		Field.Ball.Speed = 0;
@@ -250,16 +353,16 @@ void __fastcall TFormMain::TimerCheckBallTimer(TObject *Sender)
     }
 
 	// Проверка на столкновение с игроком
-	for (int i = 0; i < 2; i++)
+	for (int i = 1; i < 2; i++)
 	{
 		TImage* TestPlayer;
 		for (int j = 0; j < 3; j++) {
 			TestPlayer = Field.Team[i].Player[j].Img;
-			if (sqrt(((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y))*((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y)) + ((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))*((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))) <= TestPlayer->Width/4) {
+			if (sqrt(((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y))*((Ball->Height/2 + Ball->Position->Y) - (TestPlayer->Height/2 + TestPlayer->Position->Y)) + ((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))*((Ball->Width/2 + Ball->Position->X) - (TestPlayer->Width/2 + TestPlayer->Position->X))) <= TestPlayer->Width/4/(2-i)) {
 				Field.Ball.Speed = 0;
 				return;
 			}
-		}        // 182 274
+		}
 	}
 }
 //---------------------------------------------------------------------------
@@ -276,5 +379,18 @@ void __fastcall TFormMain::FormCloseQuery(TObject *Sender, bool &CanClose)
 	DestroyField();
 }
 
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMain::TimerCountDownTimer(TObject *Sender)
+{
+	//Game.Started = true;
+	if (!Game.TimerCount) {
+		TimerCountDown->Enabled = false;
+		PrintCount();
+		Game.CanMove = true;
+	} else {
+		LabelCount->Text = ("T:" + ToStr(Game.TimerCount--)).c_str();
+	}
+}
 //---------------------------------------------------------------------------
 

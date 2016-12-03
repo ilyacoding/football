@@ -20,7 +20,6 @@ inherited FormMain_Surface: TFormMain_Surface
   inherited ToolBarMenu: TToolBar
     Size.Width = 1080.000000000000000000
     inherited LabelCount: TLabel
-      Position.Y = 8.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
     end
   end

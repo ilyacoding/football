@@ -4,13 +4,17 @@
 #ifndef ClassTGameH
 #define ClassTGameH
 class TGame {
+private:
+	int WinCount; // Количество игр, которые необходимо выиграть
 public:
 	TGame();
+	bool CanMove;
+	bool Started;
 	bool Ended;  // Игра закончена или нет
-	int Winner;   // Кто выиграл матч
-	int WinCount; // Количество игр, которые необходимо выиграть
 	int Count[2]; // Счет каждой команды
-	void Goal(int Team);  // Кто забил мяч = 1/2
+	int TimerCount;
+	int Winner;   // Кто выиграл матч
+	void GoalTo(int Team);  // Кто забил мяч = 1/2
 };
 //---------------------------------------------------------------------------
 #endif
