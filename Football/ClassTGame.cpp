@@ -9,7 +9,18 @@ TGame::TGame()
 	Started = false;
 	Ended = false;
 	Winner = -1;
-	WinCount = 3;
+	WinCount = 1;
+	TimerCount = 0;
+	Count[0] = Count[1] = 0;
+}
+
+void TGame::InitGame()
+{
+	CanMove = false;
+	Started = false;
+	Ended = false;
+	Winner = -1;
+	WinCount = 1;
 	TimerCount = 0;
 	Count[0] = Count[1] = 0;
 }

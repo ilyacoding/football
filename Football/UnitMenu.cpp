@@ -44,7 +44,12 @@ void __fastcall TFormMenu::ButtonProfileClick(TObject *Sender)
 
 void __fastcall TFormMenu::ButtonStartGameClick(TObject *Sender)
 {
-	FormMain->Show();;
+	FormMain->ShowModal();
+	int MoneyToAdd;
+	ifstream ss("db/win.bin");
+	ss >> MoneyToAdd;
+	Udb.AddWin(Udb.pid.value, MoneyToAdd);
+	ss.close();
 }
 //---------------------------------------------------------------------------
 
@@ -53,7 +58,9 @@ void __fastcall TFormMenu::TimerCheckUserLoginTimer(TObject *Sender)
 	if (Udb.pid.value > -1)
 	{
 		LabelUser->Text = ("Добро пожаловать, " + Udb.GetUser(Udb.pid.value).name).c_str();
-		LabelInfo->Text = ("Уровень: " + ToStr(Udb.GetUser(Udb.pid.value).level) + " | Деньги: $" + ToStr(Udb.GetUser(Udb.pid.value).cash) + " | Победы: " + ToStr(Udb.GetUser(Udb.pid.value).wins)).c_str();
+		LabelCash->Text = ("Деньги: $" + ToStr(Udb.GetUser(Udb.pid.value).cash)).c_str();
+		LabelLvl->Text = ("Уровень: " + ToStr(Udb.GetUser(Udb.pid.value).level)).c_str();
+		LabelWin->Text = ("Побед: " + ToStr(Udb.GetUser(Udb.pid.value).wins)).c_str();
 
 		for (int i = 0; i < 3; i++)
 		{
@@ -91,7 +98,9 @@ void __fastcall TFormMenu::TimerCheckUserLoginTimer(TObject *Sender)
 
 	} else {
 		LabelUser->Text = "Войдите или зарегистрируйтесь";
-		LabelInfo->Text = "";
+		LabelCash->Text = "";
+		LabelLvl->Text = "";
+		LabelWin->Text = "";
 	}
 }
 //---------------------------------------------------------------------------

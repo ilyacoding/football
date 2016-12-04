@@ -18,10 +18,8 @@ class TFormMenu : public TForm
 {
 __published:	// IDE-managed Components
 	TButton *ButtonStartGame;
-	TLabel *LabelInfo;
 	TLabel *LabelUser;
 	TButton *ButtonProfile;
-	TButton *ButtonTeam;
 	TButton *ButtonGlobStat;
 	TButton *ButtonInfo;
 	TToolBar *ToolBarPlayers;
@@ -42,6 +40,10 @@ __published:	// IDE-managed Components
 	TLabel *LabelName2;
 	TImage *ImageUser2;
 	TImage *ImageBackground;
+	TToolBar *ToolBarTop;
+	TLabel *LabelCash;
+	TLabel *LabelLvl;
+	TLabel *LabelWin;
 	void __fastcall ToolBarPlayersResize(TObject *Sender);
 	void __fastcall ButtonProfileClick(TObject *Sender);
 	void __fastcall ButtonStartGameClick(TObject *Sender);

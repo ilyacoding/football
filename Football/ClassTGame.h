@@ -8,6 +8,7 @@ private:
 	int WinCount; // Количество игр, которые необходимо выиграть
 public:
 	TGame();
+    void InitGame();
 	bool CanMove;
 	bool Started;
 	bool Ended;  // Игра закончена или нет
