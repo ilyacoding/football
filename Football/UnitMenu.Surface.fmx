@@ -4,13 +4,7 @@ inherited FormMenu_Surface: TFormMenu_Surface
   DesignerMasterStyle = 0
   inherited ImageBackground: TImage
     Size.Width = 1080.000000000000000000
-    Size.Height = 1831.000000000000000000
-  end
-  inherited ButtonStartGame: TButton
-    TextSettings.Font.StyleExt = {00070000000000000004000000}
-  end
-  inherited LabelInfo: TLabel
-    Anchors = [akTop]
+    Size.Height = 1782.000000000000000000
   end
   inherited ToolBarPlayers: TToolBar
     Position.Y = 1831.000000000000000000
@@ -30,6 +24,19 @@ inherited FormMenu_Surface: TFormMenu_Surface
       inherited LabelName2: TLabel
         TextSettings.Font.StyleExt = {04040000000000000004000000}
       end
+    end
+  end
+  inherited ToolBarTop: TToolBar
+    Opacity = 0.899999976158142100
+    Size.Width = 1080.000000000000000000
+    inherited ButtonStartGame: TButton
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+    inherited LabelUser: TLabel
+      TextSettings.Font.StyleExt = {04040000000000000004000000}
+    end
+    inherited LabelCash: TLabel
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
     end
   end
 end

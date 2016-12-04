@@ -164,8 +164,8 @@ object FormMain: TFormMain
       Fill.Kind = Bitmap
       Position.X = 200.000000000000000000
       Position.Y = 160.000000000000000000
-      Size.Width = 25.000000000000000000
-      Size.Height = 25.000000000000000000
+      Size.Width = 23.000000000000000000
+      Size.Height = 23.000000000000000000
       Size.PlatformDefault = False
       Stroke.Bitmap.Bitmap.PNG = {
         89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
@@ -320,7 +320,7 @@ object FormMain: TFormMain
       Size.PlatformDefault = False
       TextSettings.Font.Size = 30.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
-      TextSettings.FontColor = claPurple
+      TextSettings.FontColor = claOrangered
     end
     object Label2: TLabel
       Position.X = 8.000000000000000000
@@ -340,6 +340,17 @@ object FormMain: TFormMain
       Size.PlatformDefault = False
       Text = 'Label1'
     end
+    object LabelCountDown: TLabel
+      Anchors = [akTop]
+      StyledSettings = [Family]
+      Position.X = 709.000000000000000000
+      Size.Width = 356.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 30.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claOrange
+    end
   end
   object TimerCountDown: TTimer
     Enabled = False
@@ -349,7 +360,7 @@ object FormMain: TFormMain
   end
   object TimerAI: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 100
     OnTimer = TimerAITimer
     Left = 736
     Top = 56

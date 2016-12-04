@@ -98,5 +98,11 @@ TProfile TUdb::GetUser(int PID)
 {
 	return user[PID];
 }
+
+void TUdb::AddWin(int PID, int Funds)
+{
+	user[PID].cash += Funds;
+	user[PID].wins++;
+}
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

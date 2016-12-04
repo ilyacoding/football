@@ -54,6 +54,7 @@ __published:	// IDE-managed Components
 	TTimer *TimerCountDown;
 	TTimer *TimerAI;
 	TTimer *TimerMoveAI;
+	TLabel *LabelCountDown;
 	void __fastcall TimerMoveUserTimer(TObject *Sender);
 	void __fastcall TimerMoveBallTimer(TObject *Sender);
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
