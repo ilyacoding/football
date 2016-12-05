@@ -44,6 +44,9 @@ __published:	// IDE-managed Components
 	TLabel *LabelCash;
 	TLabel *LabelLvl;
 	TLabel *LabelWin;
+	TButton *ButtonAdd0;
+	TButton *ButtonAdd1;
+	TButton *ButtonAdd2;
 	void __fastcall ToolBarPlayersResize(TObject *Sender);
 	void __fastcall ButtonProfileClick(TObject *Sender);
 	void __fastcall ButtonStartGameClick(TObject *Sender);
@@ -52,6 +55,9 @@ __published:	// IDE-managed Components
 	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
 	void __fastcall ButtonGlobStatClick(TObject *Sender);
 	void __fastcall ButtonInfoClick(TObject *Sender);
+	void __fastcall ButtonAdd0Click(TObject *Sender);
+	void __fastcall ButtonAdd1Click(TObject *Sender);
+	void __fastcall ButtonAdd2Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TFormMenu(TComponent* Owner);

@@ -104,5 +104,16 @@ void TUdb::AddWin(int PID, int Funds)
 	user[PID].cash += Funds;
 	user[PID].wins++;
 }
+
+bool TUdb::BuyLvl(int PID, int PlayerID)
+{
+	if (user[PID].cash >= 20000) {
+		user[PID].cash -= 20000;
+		user[PID].Team[PlayerID].speed++;
+		user[PID].Team[PlayerID].level = user[PID].Team[PlayerID].speed/3;
+		return true;
+	}
+	return false;
+}
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

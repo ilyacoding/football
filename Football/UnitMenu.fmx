@@ -120,6 +120,17 @@ object FormMenu: TFormMenu
         Size.Height = 73.000000000000000000
         Size.PlatformDefault = False
       end
+      object ButtonAdd0: TButton
+        Anchors = [akTop, akRight]
+        Position.X = 256.000000000000000000
+        Position.Y = 56.000000000000000000
+        Size.Width = 24.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = '+'
+        OnClick = ButtonAdd0Click
+      end
     end
     object PanelPlayer1: TPanel
       Align = Fit
@@ -164,6 +175,17 @@ object FormMenu: TFormMenu
         Size.Width = 73.000000000000000000
         Size.Height = 73.000000000000000000
         Size.PlatformDefault = False
+      end
+      object ButtonAdd1: TButton
+        Anchors = [akTop, akRight]
+        Position.X = 256.000000000000000000
+        Position.Y = 56.000000000000000000
+        Size.Width = 24.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = '+'
+        OnClick = ButtonAdd1Click
       end
     end
     object PanelPlayer2: TPanel
@@ -210,6 +232,17 @@ object FormMenu: TFormMenu
         Size.Width = 73.000000000000000000
         Size.Height = 73.000000000000000000
         Size.PlatformDefault = False
+      end
+      object ButtonAdd2: TButton
+        Anchors = [akTop, akRight]
+        Position.X = 256.000000000000000000
+        Position.Y = 56.000000000000000000
+        Size.Width = 24.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = '+'
+        OnClick = ButtonAdd2Click
       end
     end
   end

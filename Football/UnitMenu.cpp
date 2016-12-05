@@ -44,7 +44,11 @@ void __fastcall TFormMenu::ButtonProfileClick(TObject *Sender)
 
 void __fastcall TFormMenu::ButtonStartGameClick(TObject *Sender)
 {
+	Udb.pid.out();
+	Udb.out();
 	FormMain->ShowModal();
+	Udb.in();
+	Udb.pid.in();
 	int MoneyToAdd;
 	ifstream ss("db/win.bin");
 	ss >> MoneyToAdd;
@@ -133,6 +137,36 @@ void __fastcall TFormMenu::ButtonGlobStatClick(TObject *Sender)
 void __fastcall TFormMenu::ButtonInfoClick(TObject *Sender)
 {
 	FormInfo->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::ButtonAdd0Click(TObject *Sender)
+{
+	if (!Udb.BuyLvl(Udb.pid.value, 0))
+	{
+		string msg = "Недостаточно средств на счету.";
+		ShowMessage(msg.c_str());
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::ButtonAdd1Click(TObject *Sender)
+{
+	if (!Udb.BuyLvl(Udb.pid.value, 1))
+	{
+		string msg = "Недостаточно средств на счету.";
+		ShowMessage(msg.c_str());
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::ButtonAdd2Click(TObject *Sender)
+{
+	if (!Udb.BuyLvl(Udb.pid.value, 2))
+	{
+		string msg = "Недостаточно средств на счету.";
+		ShowMessage(msg.c_str());
+	}
 }
 //---------------------------------------------------------------------------
 
