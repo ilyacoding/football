@@ -21,6 +21,7 @@ public:
 	bool reg(TProfile prfl);
 	TProfile GetUser(int PID);
 	void AddWin(int PID, int Funds);
+	bool BuyLvl(int PID, int PlayerID);
 	int log(string name);
 	int length();
 };

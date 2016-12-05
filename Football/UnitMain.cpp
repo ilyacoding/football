@@ -14,6 +14,8 @@
 // Константы, важные объявления
 TFormMain *FormMain;
 TField Field;
+int DefSpeed[3];
+TUdb Udb;
 TGame Game;
 UnicodeString Host;
 const int MainID = 1;
@@ -198,7 +200,7 @@ void __fastcall TFormMain::TimerAITimer(TObject *Sender)
 		}
 		if (Field.CalcDistance(BallX, BallY, PlayX, PlayY) > 5)
 		{
-			Field.Team[SecondID].Player[1].Speed = 3;
+			Field.Team[SecondID].Player[1].Speed = 4;
 			Field.Team[SecondID].Player[1].mouseX = BallX;
 			Field.Team[SecondID].Player[1].mouseY = BallY;
 		} else {
@@ -216,7 +218,7 @@ void __fastcall TFormMain::TimerAITimer(TObject *Sender)
 		}
 		if (Field.CalcDistance(BallX, BallY, PlayX, PlayY) > 5 && (BallY > ((180)*PanelPlayArea->Height/545)) && (BallY < ((367)*PanelPlayArea->Height/545)))
 		{
-			Field.Team[SecondID].Player[0].Speed = 3;
+			Field.Team[SecondID].Player[0].Speed = 4;
 			Field.Team[SecondID].Player[0].mouseX = PlayX;
 			Field.Team[SecondID].Player[0].mouseY = BallY;
 		} else {
@@ -234,7 +236,7 @@ void __fastcall TFormMain::TimerAITimer(TObject *Sender)
 		}
 		if (Field.CalcDistance(BallX, BallY, PlayX, PlayY) > 5)
 		{
-			Field.Team[SecondID].Player[2].Speed = 3;
+			Field.Team[SecondID].Player[2].Speed = 4;
 			Field.Team[SecondID].Player[2].mouseX = PlayX;
 			Field.Team[SecondID].Player[2].mouseY = BallY;
 		} else {
@@ -248,10 +250,6 @@ void __fastcall TFormMain::FormKeyDown(TObject *Sender, WORD &Key, System::WideC
 		  TShiftState Shift)
 {
 	Label1->Text = KeyChar;
-
-	if (KeyChar == vkShift)
-		Field.Team[SecondID].Player[Field.Team[SecondID].CurrPlayer].Speed = 5;
-
 	// Обработка ускорения
 	if (isalpha(KeyChar))
 	{
@@ -279,23 +277,13 @@ void __fastcall TFormMain::FormKeyDown(TObject *Sender, WORD &Key, System::WideC
 					Ball->Position->X += 5;
 				}
 			break;
-			/*case 'e': case 'E':
-				if (KeyChar - 1 == Field.Team[MainID].CurrPlayer) {
-					if ((Field.CalcDistance(Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y, Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Position->X + Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Width/2, Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Position->Y + Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Height/2) <= Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Height)) {
-						Field.Ball.Speed += 3;
-						Field.Ball.Degree = Field.CalcDegree(Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Width/2 + Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Position->X, Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Height/2 + Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Img->Position->Y, Ball->Width/2 + Ball->Position->X, Ball->Height/2 + Ball->Position->Y);
-						Ball->Position->X += 5;
-
-					}
-				}
-			break; */
 		}
 
 	} else if (isdigit(KeyChar)) {
 		KeyChar -= '0';
 		switch(KeyChar) {
 			case 1: case 2: case 3:
-				Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Speed = 2;
+				Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Speed = DefSpeed[Field.Team[MainID].CurrPlayer]/2;
 				Field.Team[MainID].CurrPlayer = KeyChar - 1;
 			break;
 		}
@@ -309,7 +297,7 @@ void __fastcall TFormMain::PanelPlayAreaMouseMove(TObject *Sender, TShiftState S
 {
 	Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].mouseX = X;
 	Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].mouseY = Y;
-	Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Speed = 5;
+	Field.Team[MainID].Player[Field.Team[MainID].CurrPlayer].Speed = DefSpeed[Field.Team[MainID].CurrPlayer];
 	Label2->Text = ToStr(X).c_str();
 	Label3->Text = ToStr(Y).c_str();
 }
@@ -399,6 +387,12 @@ void __fastcall TFormMain::TimerCheckBallTimer(TObject *Sender)
 
 void __fastcall TFormMain::FormShow(TObject *Sender)
 {
+	Udb.in();
+	Udb.pid.in();
+	for (int i = 0; i < 3; i++)
+		DefSpeed[i] = Udb.GetUser(Udb.pid.value).Team[i].speed;
+	Udb.pid.out();
+	Udb.out();
 	InitField();
 	Game.InitGame();
 }
