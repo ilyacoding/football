@@ -46,15 +46,13 @@ __published:	// IDE-managed Components
 	TPanel *PanelPlayArea;
 	TTimer *TimerCheckBall;
 	TLabel *LabelFPS;
-	TLabel *Label1;
-	TLabel *Label2;
-	TLabel *Label3;
 	TToolBar *ToolBarMenu;
 	TLabel *LabelCount;
 	TTimer *TimerCountDown;
 	TTimer *TimerAI;
 	TTimer *TimerMoveAI;
 	TLabel *LabelCountDown;
+	TLabel *LabelGameTo;
 	void __fastcall TimerMoveUserTimer(TObject *Sender);
 	void __fastcall TimerMoveBallTimer(TObject *Sender);
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, System::WideChar &KeyChar,

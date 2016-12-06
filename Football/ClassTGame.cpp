@@ -12,7 +12,7 @@ void TGame::InitGame()
 {
 	CanMove = false;
 	Winner = -1;
-	WinCount = 1;
+	WinCount = 3;
 	TimerCount = 0;
 	Count[0] = Count[1] = 0;
 }
