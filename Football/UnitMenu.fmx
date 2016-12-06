@@ -1,6 +1,7 @@
 object FormMenu: TFormMenu
   Left = 0
   Top = 0
+  BorderStyle = Single
   Caption = #1060#1091#1090#1073#1086#1083
   ClientHeight = 410
   ClientWidth = 872
@@ -75,7 +76,6 @@ object FormMenu: TFormMenu
     Size.Height = 89.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 5
-    OnResize = ToolBarPlayersResize
     object PanelPlayer0: TPanel
       Align = FitLeft
       Size.Width = 289.000000000000000000
@@ -264,7 +264,7 @@ object FormMenu: TFormMenu
       Size.Width = 158.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 0
+      TabOrder = 2
       Text = #1042' '#1080#1075#1088#1091'!'
       TextSettings.Font.Family = 'Segoe Print'
       TextSettings.Font.Size = 30.000000000000000000
@@ -275,9 +275,9 @@ object FormMenu: TFormMenu
     object LabelUser: TLabel
       Anchors = [akTop, akRight]
       StyledSettings = [Family]
-      Position.X = 584.000000000000000000
+      Position.X = 544.000000000000000000
       Position.Y = 8.000000000000000000
-      Size.Width = 217.000000000000000000
+      Size.Width = 289.000000000000000000
       Size.Height = 25.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 18.000000000000000000
@@ -314,6 +314,28 @@ object FormMenu: TFormMenu
       TextSettings.Font.Size = 20.000000000000000000
       TextSettings.FontColor = claCoral
       Text = 'LabelWin'
+    end
+    object ButtonAddLvl: TButton
+      Anchors = [akLeft]
+      Position.X = 104.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 17.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = '+'
+      OnClick = ButtonAddLvlClick
+    end
+    object ButtonExit: TButton
+      Anchors = [akRight]
+      Position.X = 848.000000000000000000
+      Position.Y = 9.000000000000000000
+      Size.Width = 16.000000000000000000
+      Size.Height = 16.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'X'
+      OnClick = ButtonExitClick
     end
   end
 end

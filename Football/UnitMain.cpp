@@ -321,7 +321,7 @@ void __fastcall TFormMain::TimerCheckBallTimer(TObject *Sender)
 		Game.GoalTo(GT);
 		PrintCount();
 		DestroyField();
-		if (Game.Ended) {
+		if (Game.Winner > -1) {
 			ofstream ss("db/win.bin", std::ofstream::out | std::ofstream::trunc);
 			if (Game.Winner == 0)
 			{
@@ -329,9 +329,9 @@ void __fastcall TFormMain::TimerCheckBallTimer(TObject *Sender)
 				ShowMessage(msg.c_str());
 				ss << 0;
 			} else {
-				string msg = "Вы ПОБЕДИЛИ! На ваш счет будет зачислено $5000.";
+				string msg = "Вы ПОБЕДИЛИ! На ваш счет будет зачислено $3000.";
 				ShowMessage(msg.c_str());
-				ss << 5000;
+				ss << 3000;
             }
 			ss.close();
 			FormMain->Close();

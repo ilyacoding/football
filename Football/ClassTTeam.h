@@ -7,8 +7,7 @@
 #define ClassTTeamH
 #include "UnitMain.h"
 #include "ClassTFiPlayer.h"
-class TTeam
-{
+class TTeam {
 	public:
 		TFiPlayer Player[TeamSize];
 		int CurrPlayer;

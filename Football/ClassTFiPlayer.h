@@ -3,8 +3,7 @@
 #ifndef ClassTFiPlayerH
 #define ClassTFiPlayerH
 #include <FMX.Objects.hpp>
-class TFiPlayer
-{
+class TFiPlayer {
 	public:
 		int Speed;
 		float mouseX, mouseY;

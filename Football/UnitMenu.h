@@ -47,7 +47,8 @@ __published:	// IDE-managed Components
 	TButton *ButtonAdd0;
 	TButton *ButtonAdd1;
 	TButton *ButtonAdd2;
-	void __fastcall ToolBarPlayersResize(TObject *Sender);
+	TButton *ButtonAddLvl;
+	TButton *ButtonExit;
 	void __fastcall ButtonProfileClick(TObject *Sender);
 	void __fastcall ButtonStartGameClick(TObject *Sender);
 	void __fastcall TimerCheckUserLoginTimer(TObject *Sender);
@@ -58,8 +59,11 @@ __published:	// IDE-managed Components
 	void __fastcall ButtonAdd0Click(TObject *Sender);
 	void __fastcall ButtonAdd1Click(TObject *Sender);
 	void __fastcall ButtonAdd2Click(TObject *Sender);
+	void __fastcall ButtonAddLvlClick(TObject *Sender);
+	void __fastcall ButtonExitClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
+    void __fastcall SetUserVisible(bool state);
 	__fastcall TFormMenu(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
