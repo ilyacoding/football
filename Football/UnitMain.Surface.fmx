@@ -26,5 +26,8 @@ inherited FormMain_Surface: TFormMain_Surface
     inherited LabelCountDown: TLabel
       TextSettings.Font.StyleExt = {00070000000000000004000000}
     end
+    inherited LabelGameTo: TLabel
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
   end
 end

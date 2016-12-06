@@ -322,24 +322,6 @@ object FormMain: TFormMain
       TextSettings.Font.StyleExt = {00070000000000000004000000}
       TextSettings.FontColor = claOrangered
     end
-    object Label2: TLabel
-      Position.X = 8.000000000000000000
-      Position.Y = 7.000000000000000000
-      Text = 'Label2'
-    end
-    object Label3: TLabel
-      Position.X = 8.000000000000000000
-      Position.Y = 23.000000000000000000
-      Text = 'Label3'
-    end
-    object Label1: TLabel
-      Position.X = 136.000000000000000000
-      Position.Y = 7.000000000000000000
-      Size.Width = 120.000000000000000000
-      Size.Height = 17.000000000000000000
-      Size.PlatformDefault = False
-      Text = 'Label1'
-    end
     object LabelCountDown: TLabel
       Anchors = [akTop]
       StyledSettings = [Family]
@@ -350,6 +332,18 @@ object FormMain: TFormMain
       TextSettings.Font.Size = 30.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
       TextSettings.FontColor = claOrange
+    end
+    object LabelGameTo: TLabel
+      Anchors = [akTop]
+      StyledSettings = [Family]
+      Position.X = 5.000000000000000000
+      Size.Width = 356.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 26.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claOrange
+      Text = 'Sample'
     end
   end
   object TimerCountDown: TTimer
