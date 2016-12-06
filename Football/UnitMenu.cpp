@@ -8,34 +8,24 @@
 #include "UnitMain.h"
 #include "UnitStat.h"
 #include "UnitInfo.h"
-
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.fmx"
 #pragma resource ("*.Windows.fmx", _PLAT_MSWINDOWS)
 #pragma resource ("*.Surface.fmx", _PLAT_MSWINDOWS)
-
+//---------------------------------------------------------------------------
 TFormMenu *FormMenu;
 TUdb Udb;
-
 //---------------------------------------------------------------------------
 __fastcall TFormMenu::TFormMenu(TComponent* Owner)
 	: TForm(Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TFormMenu::ToolBarPlayersResize(TObject *Sender)
-{
-	PanelPlayer0->Width = ToolBarPlayers->Width/3;
-	PanelPlayer1->Width = ToolBarPlayers->Width/3;
-	PanelPlayer2->Width = ToolBarPlayers->Width/3;
-}
-//---------------------------------------------------------------------------
 
 
 void __fastcall TFormMenu::ButtonProfileClick(TObject *Sender)
 {
-	//Application->CreateForm(TFormAuth, FormAuth);
 	FormAuth->ShowModal();
 	Udb.in();
 	Udb.pid.in();
@@ -44,6 +34,12 @@ void __fastcall TFormMenu::ButtonProfileClick(TObject *Sender)
 
 void __fastcall TFormMenu::ButtonStartGameClick(TObject *Sender)
 {
+	if (Udb.pid.value == -1)
+	{
+		string msg = "Перед началом игры нужно зарегистрироваться.";
+		ShowMessage(msg.c_str());
+		return;
+	}
 	Udb.pid.out();
 	Udb.out();
 	FormMain->ShowModal();
@@ -56,6 +52,25 @@ void __fastcall TFormMenu::ButtonStartGameClick(TObject *Sender)
 	ss.close();
 }
 //---------------------------------------------------------------------------
+void __fastcall TFormMenu::SetUserVisible(bool state)
+{
+	ImageUser0->Visible = state;
+	ImageUser1->Visible = state;
+	ImageUser2->Visible = state;
+	LabelName0->Visible = state;
+	LabelSpeed0->Visible = state;
+	LabelLevel0->Visible = state;
+	LabelName1->Visible = state;
+	LabelSpeed1->Visible = state;
+	LabelLevel1->Visible = state;
+	LabelName2->Visible = state;
+	LabelSpeed2->Visible = state;
+	LabelLevel2->Visible = state;
+	ButtonAddLvl->Visible = state;
+	ButtonAdd0->Visible = state;
+	ButtonAdd1->Visible = state;
+	ButtonAdd2->Visible = state;
+}
 
 void __fastcall TFormMenu::TimerCheckUserLoginTimer(TObject *Sender)
 {
@@ -97,14 +112,14 @@ void __fastcall TFormMenu::TimerCheckUserLoginTimer(TObject *Sender)
 			LabelName->Text = (Udb.GetUser(Udb.pid.value).Team[i].name + " " + Udb.GetUser(Udb.pid.value).Team[i].surname).c_str();
 			LabelSpeed->Text = ("Скорость: " + ToStr(Udb.GetUser(Udb.pid.value).Team[i].speed)).c_str();
 			LabelLevel->Text = ("Уровень: " + ToStr(Udb.GetUser(Udb.pid.value).Team[i].level)).c_str();
-
-        }
-
+		}
+		SetUserVisible(true);
 	} else {
 		LabelUser->Text = "Войдите или зарегистрируйтесь";
 		LabelCash->Text = "";
 		LabelLvl->Text = "";
 		LabelWin->Text = "";
+		SetUserVisible(false);
 	}
 }
 //---------------------------------------------------------------------------
@@ -130,6 +145,16 @@ void __fastcall TFormMenu::FormCloseQuery(TObject *Sender, bool &CanClose)
 
 void __fastcall TFormMenu::ButtonGlobStatClick(TObject *Sender)
 {
+	if (Udb.pid.value == -1)
+	{
+		string msg = "Для просмотра статистики нужно зарегистрироваться.";
+		ShowMessage(msg.c_str());
+		return;
+	}
+	Udb.pid.out();
+	Udb.out();
+	Udb.in();
+	Udb.pid.in();
 	FormStat->ShowModal();
 }
 //---------------------------------------------------------------------------
@@ -167,6 +192,24 @@ void __fastcall TFormMenu::ButtonAdd2Click(TObject *Sender)
 		string msg = "Недостаточно средств на счету.";
 		ShowMessage(msg.c_str());
 	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::ButtonAddLvlClick(TObject *Sender)
+{
+	if (!Udb.BuyAccountLvl(Udb.pid.value))
+	{
+		string msg = "Недостаточно средств на счету.";
+		ShowMessage(msg.c_str());
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::ButtonExitClick(TObject *Sender)
+{
+	Udb.pid.value = -1;
+	Udb.pid.out();
+	Udb.pid.in();
 }
 //---------------------------------------------------------------------------
 

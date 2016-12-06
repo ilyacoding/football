@@ -7,11 +7,9 @@ class TGame {
 private:
 	int WinCount; // Количество игр, которые необходимо выиграть
 public:
+	void InitGame();
 	TGame();
-    void InitGame();
 	bool CanMove;
-	bool Started;
-	bool Ended;  // Игра закончена или нет
 	int Count[2]; // Счет каждой команды
 	int TimerCount;
 	int Winner;   // Кто выиграл матч

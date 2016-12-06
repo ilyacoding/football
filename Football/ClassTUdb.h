@@ -19,10 +19,11 @@ public:
 	void SortForStat();
 	bool IsExist(string name);
 	bool reg(TProfile prfl);
+	int log(string name);
 	TProfile GetUser(int PID);
 	void AddWin(int PID, int Funds);
 	bool BuyLvl(int PID, int PlayerID);
-	int log(string name);
+	bool BuyAccountLvl(int PID);
 	int length();
 };
 

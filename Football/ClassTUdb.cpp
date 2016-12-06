@@ -115,5 +115,15 @@ bool TUdb::BuyLvl(int PID, int PlayerID)
 	}
 	return false;
 }
+
+bool TUdb::BuyAccountLvl(int PID)
+{
+	if (user[PID].cash >= 50000) {
+		user[PID].cash -= 50000;
+		user[PID].level++;
+		return true;
+	}
+	return false;
+}
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

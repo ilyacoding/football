@@ -7,11 +7,11 @@
 
 class TProfile {
 public:
+	TPlayer Team[3];
 	string name;
 	int level;
 	int cash;
 	int wins;
-	TPlayer Team[3];
 	void write(ofstream& ss);
 	void read(ifstream& ss);
 };

@@ -9,7 +9,6 @@
 #pragma resource "*.fmx"
 TFormStat *FormStat;
 TUdb Udb;
-
 int k = 1;
 //---------------------------------------------------------------------------
 __fastcall TFormStat::TFormStat(TComponent* Owner)
