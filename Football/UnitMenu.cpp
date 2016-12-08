@@ -126,6 +126,7 @@ void __fastcall TFormMenu::TimerCheckUserLoginTimer(TObject *Sender)
 
 void __fastcall TFormMenu::FormCreate(TObject *Sender)
 {
+	MediaPlayerMenu->Play();
 	ImageBackground->Bitmap->LoadFromFile(("img/menu/" + ToStr(NumOfImage++) + ".jpg").c_str());
 	PanelPlayer0->Width = ToolBarPlayers->Width/3;
 	PanelPlayer1->Width = ToolBarPlayers->Width/3;
@@ -280,6 +281,13 @@ void __fastcall TFormMenu::TimerChangePhotoTimer(TObject *Sender)
 {
 	ImageBackground->Bitmap->LoadFromFile(("img/menu/" + ToStr(NumOfImage) + ".jpg").c_str());
 	NumOfImage = (NumOfImage + 1) % AmountOfImages;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::SpeedButtonAddLvlMouseEnter(TObject *Sender)
+{
+	if (!FloatAnimationAddLvl->Running)
+		FloatAnimationAddLvl->Start();
 }
 //---------------------------------------------------------------------------
 

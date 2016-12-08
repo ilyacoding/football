@@ -366,4 +366,8 @@ object FormMain: TFormMain
     Left = 920
     Top = 56
   end
+  object MediaPlayer1: TMediaPlayer
+    Left = 736
+    Top = 104
+  end
 end

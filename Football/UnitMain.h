@@ -35,6 +35,7 @@
 #include <IdContext.hpp>
 
 #include "ClassTUdb.h"
+#include <FMX.Media.hpp>
 //---------------------------------------------------------------------------
 class TFormMain : public TForm
 {
@@ -53,6 +54,7 @@ __published:	// IDE-managed Components
 	TTimer *TimerMoveAI;
 	TLabel *LabelCountDown;
 	TLabel *LabelGameTo;
+	TMediaPlayer *MediaPlayer1;
 	void __fastcall TimerMoveUserTimer(TObject *Sender);
 	void __fastcall TimerMoveBallTimer(TObject *Sender);
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
@@ -71,6 +73,7 @@ public:		// User declarations
 	void __fastcall DestroyField();
 	void __fastcall PrintCount();
 	void __fastcall InitTimer(int Count);
+    void __fastcall PlayMusic(UnicodeString s);
 	TImage *tmpImage;
 	TLabel *tmpLabel;
 	__fastcall TFormMain(TComponent* Owner);
