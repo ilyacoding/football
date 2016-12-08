@@ -101,8 +101,10 @@ TProfile TUdb::GetUser(int PID)
 
 void TUdb::AddWin(int PID, int Funds)
 {
-	user[PID].cash += Funds;
-	user[PID].wins++;
+	if (Funds > 0) {
+		user[PID].cash += Funds;
+		user[PID].wins++;
+	}
 }
 
 bool TUdb::BuyLvl(int PID, int PlayerID)
