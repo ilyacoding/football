@@ -11,16 +11,15 @@
 #include <FMX.StdCtrls.hpp>
 #include <FMX.Types.hpp>
 #include <FMX.Objects.hpp>
-//---------------------------------------------------------------------------
-#include "ClassTUdb.h"
 #include <FMX.ImgList.hpp>
 #include <System.ImageList.hpp>
 #include <FMX.Ani.hpp>
 //---------------------------------------------------------------------------
+#include "ClassTUdb.h"
+//---------------------------------------------------------------------------
 class TFormMenu : public TForm
 {
 __published:	// IDE-managed Components
-	TButton *ButtonStartGame;
 	TLabel *LabelUser;
 	TToolBar *ToolBarPlayers;
 	TPanel *PanelPlayer0;
@@ -44,11 +43,6 @@ __published:	// IDE-managed Components
 	TLabel *LabelCash;
 	TLabel *LabelLvl;
 	TLabel *LabelWin;
-	TButton *ButtonAdd0;
-	TButton *ButtonAdd1;
-	TButton *ButtonAdd2;
-	TButton *ButtonAddLvl;
-	TButton *ButtonExit;
 	TSpeedButton *SpeedButtonProfile;
 	TFloatAnimation *FloatAnimationPanelHeight;
 	TImage *ImageProfile;
@@ -59,16 +53,30 @@ __published:	// IDE-managed Components
 	TFloatAnimation *FloatAnimationMouseProfile;
 	TFloatAnimation *FloatAnimationMouseStat;
 	TFloatAnimation *FloatAnimationMouseInfo;
+	TSpeedButton *SpeedButtonStartGame;
+	TImage *ImageStartGame;
+	TSpeedButton *SpeedButtonAdd0;
+	TImage *ImageAdd0;
+	TSpeedButton *SpeedButtonAdd1;
+	TImage *ImageAdd1;
+	TSpeedButton *SpeedButtonAdd2;
+	TImage *ImageAdd2;
+	TSpeedButton *SpeedButtonExit;
+	TImage *ImageExit;
+	TSpeedButton *SpeedButtonAddLvl;
+	TImage *ImageAddLvl;
+	TCalloutPanel *CalloutPanelToReg;
+	TLabel *LabelNeedRegister;
+	TFloatAnimation *FloatAnimationPanelTopHeight;
+	TFloatAnimation *FloatAnimationStartGameHeight;
+	TFloatAnimation *FloatAnimationUserNameHeight;
+	TTimer *TimerChangePhoto;
+	TProgressBar *ProgressBarPhoto;
+	TFloatAnimation *FloatAnimationChangePhoto;
 	void __fastcall ButtonProfileClick(TObject *Sender);
-	void __fastcall ButtonStartGameClick(TObject *Sender);
 	void __fastcall TimerCheckUserLoginTimer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
-	void __fastcall ButtonAdd0Click(TObject *Sender);
-	void __fastcall ButtonAdd1Click(TObject *Sender);
-	void __fastcall ButtonAdd2Click(TObject *Sender);
-	void __fastcall ButtonAddLvlClick(TObject *Sender);
-	void __fastcall ButtonExitClick(TObject *Sender);
 	void __fastcall FormResize(TObject *Sender);
 	void __fastcall SpeedButtonProfileClick(TObject *Sender);
 	void __fastcall SpeedButtonAboutClick(TObject *Sender);
@@ -76,6 +84,13 @@ __published:	// IDE-managed Components
 	void __fastcall SpeedButtonProfileMouseEnter(TObject *Sender);
 	void __fastcall SpeedButtonStatsMouseEnter(TObject *Sender);
 	void __fastcall SpeedButtonAboutMouseEnter(TObject *Sender);
+	void __fastcall SpeedButtonStartGameClick(TObject *Sender);
+	void __fastcall SpeedButtonAdd0Click(TObject *Sender);
+	void __fastcall SpeedButtonAdd1Click(TObject *Sender);
+	void __fastcall SpeedButtonAdd2Click(TObject *Sender);
+	void __fastcall SpeedButtonExitClick(TObject *Sender);
+	void __fastcall SpeedButtonAddLvlClick(TObject *Sender);
+	void __fastcall TimerChangePhotoTimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
     void __fastcall SetUserVisible(bool state);

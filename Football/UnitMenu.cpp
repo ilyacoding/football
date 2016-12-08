@@ -16,6 +16,9 @@
 //---------------------------------------------------------------------------
 TFormMenu *FormMenu;
 TUdb Udb;
+int AmountOfImages = 4;
+int NumOfImage = 0;
+int x = 5;
 //---------------------------------------------------------------------------
 __fastcall TFormMenu::TFormMenu(TComponent* Owner)
 	: TForm(Owner)
@@ -32,26 +35,6 @@ void __fastcall TFormMenu::ButtonProfileClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TFormMenu::ButtonStartGameClick(TObject *Sender)
-{
-	if (Udb.pid.value == -1)
-	{
-		string msg = "Перед началом игры нужно зарегистрироваться.";
-		ShowMessage(msg.c_str());
-		return;
-	}
-	Udb.pid.out();
-	Udb.out();
-	FormMain->ShowModal();
-	Udb.in();
-	Udb.pid.in();
-	int MoneyToAdd;
-	ifstream ss("db/win.bin");
-	ss >> MoneyToAdd;
-	Udb.AddWin(Udb.pid.value, MoneyToAdd);
-	ss.close();
-}
-//---------------------------------------------------------------------------
 void __fastcall TFormMenu::SetUserVisible(bool state)
 {
 	ImageUser0->Visible = state;
@@ -66,17 +49,27 @@ void __fastcall TFormMenu::SetUserVisible(bool state)
 	LabelName2->Visible = state;
 	LabelSpeed2->Visible = state;
 	LabelLevel2->Visible = state;
-	ButtonAddLvl->Visible = state;
-	ButtonAdd0->Visible = state;
-	ButtonAdd1->Visible = state;
-    ButtonExit->Visible = state;
-	ButtonAdd2->Visible = state;
+	SpeedButtonAddLvl->Visible = state;
+	SpeedButtonAdd0->Visible = state;
+	SpeedButtonAdd1->Visible = state;
+	SpeedButtonExit->Visible = state;
+	SpeedButtonAdd2->Visible = state;
+	CalloutPanelToReg->Visible = !state;
 	if (state) {
 		FloatAnimationPanelHeight->StopValue = 89;
+		FloatAnimationPanelTopHeight->StopValue = 49;
+		FloatAnimationStartGameHeight->StopValue = 49;
+		FloatAnimationUserNameHeight->StopValue = 25;
 	} else {
 		FloatAnimationPanelHeight->StopValue = 0;
+		FloatAnimationPanelTopHeight->StopValue = 0;
+		FloatAnimationStartGameHeight->StopValue = 0;
+		FloatAnimationUserNameHeight->StopValue = 0;
 	}
 	FloatAnimationPanelHeight->Start();
+	FloatAnimationPanelTopHeight->Start();
+	FloatAnimationStartGameHeight->Start();
+	FloatAnimationUserNameHeight->Start();
 }
 
 void __fastcall TFormMenu::TimerCheckUserLoginTimer(TObject *Sender)
@@ -133,13 +126,17 @@ void __fastcall TFormMenu::TimerCheckUserLoginTimer(TObject *Sender)
 
 void __fastcall TFormMenu::FormCreate(TObject *Sender)
 {
-	ImageBackground->Bitmap->LoadFromFile("img/menu-bg.jpg");
+	ImageBackground->Bitmap->LoadFromFile(("img/menu/" + ToStr(NumOfImage++) + ".jpg").c_str());
 	PanelPlayer0->Width = ToolBarPlayers->Width/3;
 	PanelPlayer1->Width = ToolBarPlayers->Width/3;
 	PanelPlayer2->Width = ToolBarPlayers->Width/3;
 
 	Udb.in();
 	Udb.pid.in();
+	Udb.pid.value = -1;
+	Udb.pid.out();
+	ToolBarPlayers->Height = 0;
+	ToolBarTop->Height = 0;
 }
 //---------------------------------------------------------------------------
 
@@ -147,56 +144,6 @@ void __fastcall TFormMenu::FormCloseQuery(TObject *Sender, bool &CanClose)
 {
 	Udb.out();
 	CanClose = true;
-}
-//---------------------------------------------------------------------------
-
-
-
-void __fastcall TFormMenu::ButtonAdd0Click(TObject *Sender)
-{
-	if (!Udb.BuyLvl(Udb.pid.value, 0))
-	{
-		string msg = "Недостаточно средств на счету.";
-		ShowMessage(msg.c_str());
-	}
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TFormMenu::ButtonAdd1Click(TObject *Sender)
-{
-	if (!Udb.BuyLvl(Udb.pid.value, 1))
-	{
-		string msg = "Недостаточно средств на счету.";
-		ShowMessage(msg.c_str());
-	}
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TFormMenu::ButtonAdd2Click(TObject *Sender)
-{
-	if (!Udb.BuyLvl(Udb.pid.value, 2))
-	{
-		string msg = "Недостаточно средств на счету.";
-		ShowMessage(msg.c_str());
-	}
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TFormMenu::ButtonAddLvlClick(TObject *Sender)
-{
-	if (!Udb.BuyAccountLvl(Udb.pid.value))
-	{
-		string msg = "Недостаточно средств на счету.";
-		ShowMessage(msg.c_str());
-	}
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TFormMenu::ButtonExitClick(TObject *Sender)
-{
-	Udb.pid.value = -1;
-	Udb.pid.out();
-	Udb.pid.in();
 }
 //---------------------------------------------------------------------------
 
@@ -257,6 +204,82 @@ void __fastcall TFormMenu::SpeedButtonAboutMouseEnter(TObject *Sender)
 {
 	if (!FloatAnimationMouseInfo->Running)
 		FloatAnimationMouseInfo->Start();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::SpeedButtonStartGameClick(TObject *Sender)
+{
+	if (Udb.pid.value == -1)
+	{
+		string msg = "Перед началом игры нужно зарегистрироваться.";
+		ShowMessage(msg.c_str());
+		return;
+	}
+	Udb.pid.out();
+	Udb.out();
+	FormMain->ShowModal();
+	Udb.in();
+	Udb.pid.in();
+	int MoneyToAdd;
+	ifstream ss("db/win.bin");
+	ss >> MoneyToAdd;
+	Udb.AddWin(Udb.pid.value, MoneyToAdd);
+	ss.close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::SpeedButtonAdd0Click(TObject *Sender)
+{
+	if (!Udb.BuyLvl(Udb.pid.value, 0))
+	{
+		string msg = "Недостаточно средств на счету.";
+		ShowMessage(msg.c_str());
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::SpeedButtonAdd1Click(TObject *Sender)
+{
+	if (!Udb.BuyLvl(Udb.pid.value, 1))
+	{
+		string msg = "Недостаточно средств на счету.";
+		ShowMessage(msg.c_str());
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::SpeedButtonAdd2Click(TObject *Sender)
+{
+ 	if (!Udb.BuyLvl(Udb.pid.value, 2))
+	{
+		string msg = "Недостаточно средств на счету.";
+		ShowMessage(msg.c_str());
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::SpeedButtonExitClick(TObject *Sender)
+{
+	Udb.pid.value = -1;
+	Udb.pid.out();
+	Udb.pid.in();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::SpeedButtonAddLvlClick(TObject *Sender)
+{
+	if (!Udb.BuyAccountLvl(Udb.pid.value))
+	{
+		string msg = "Недостаточно средств на счету.";
+		ShowMessage(msg.c_str());
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::TimerChangePhotoTimer(TObject *Sender)
+{
+	ImageBackground->Bitmap->LoadFromFile(("img/menu/" + ToStr(NumOfImage) + ".jpg").c_str());
+	NumOfImage = (NumOfImage + 1) % AmountOfImages;
 }
 //---------------------------------------------------------------------------
 

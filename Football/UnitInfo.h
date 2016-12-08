@@ -17,7 +17,7 @@ class TFormInfo : public TForm
 __published:	// IDE-managed Components
 	TToolBar *ToolBar1;
 	TLabel *LabelInfo;
-	TMemo *Memo1;
+	TMemo *MemoInfo;
 private:	// User declarations
 public:		// User declarations
 	__fastcall TFormInfo(TComponent* Owner);
