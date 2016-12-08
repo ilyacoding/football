@@ -32,6 +32,13 @@ __fastcall TFormMain::TFormMain(TComponent* Owner)
 {
 }
 
+void __fastcall TFormMain::PlayMusic(UnicodeString str)
+{
+	MediaPlayer1->Clear();
+	MediaPlayer1->FileName = "music/" + str;
+	MediaPlayer1->Play();
+}
+
 //---------------------------------------------------------------------------
 void __fastcall TFormMain::InitTimer(int Count)
 {
@@ -319,10 +326,12 @@ void __fastcall TFormMain::TimerCheckBallTimer(TObject *Sender)
 			ofstream ss("db/win.bin", std::ofstream::out | std::ofstream::trunc);
 			if (Game.Winner == 0)
 			{
+				PlayMusic("loose.mp3");
 				string msg = "Вы проиграли";
 				ShowMessage(msg.c_str());
 				ss << 0;
 			} else {
+				PlayMusic("win.mp3");
 				string msg = "Вы ПОБЕДИЛИ! На ваш счет будет зачислено $5000.";
 				ShowMessage(msg.c_str());
 				ss << 5000;
@@ -330,7 +339,8 @@ void __fastcall TFormMain::TimerCheckBallTimer(TObject *Sender)
 			ss.close();
 			FormMain->Close();
 		} else {
-            InitField();
+			PlayMusic("goal.wav");
+			InitField();
         }
 		Field.Ball.Speed = 0;
 		Field.Ball.Degree = 0;
@@ -341,6 +351,7 @@ void __fastcall TFormMain::TimerCheckBallTimer(TObject *Sender)
 	// Проверка на выход из поля
 	if ((Field.Ball.CBall->Width/2 + Field.Ball.CBall->Position->X) < (54*PanelPlayArea->Width/1062))
 	{
+		PlayMusic("svist.mp3");
 		InitTimer(0);
 		Field.Ball.CBall->Position->X = BallDelta[0]*PanelPlayArea->Width - Field.Ball.CBall->Width/2;
 		Field.Ball.CBall->Position->Y = PanelPlayArea->Height/2 - Field.Ball.CBall->Height/2;
@@ -353,6 +364,7 @@ void __fastcall TFormMain::TimerCheckBallTimer(TObject *Sender)
 		return;
 	} else if ((Field.Ball.CBall->Width/2 + Field.Ball.CBall->Position->X) > ((1062-54)*PanelPlayArea->Width/1062))
 	{
+		PlayMusic("svist.mp3");
 		InitTimer(0);
 		Field.Ball.CBall->Position->X = BallDelta[1]*PanelPlayArea->Width - Field.Ball.CBall->Width/2;
 		Field.Ball.CBall->Position->Y = PanelPlayArea->Height/2 - Field.Ball.CBall->Height/2;

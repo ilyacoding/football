@@ -16,6 +16,7 @@
 #include <FMX.Ani.hpp>
 //---------------------------------------------------------------------------
 #include "ClassTUdb.h"
+#include <FMX.Media.hpp>
 //---------------------------------------------------------------------------
 class TFormMenu : public TForm
 {
@@ -73,6 +74,8 @@ __published:	// IDE-managed Components
 	TTimer *TimerChangePhoto;
 	TProgressBar *ProgressBarPhoto;
 	TFloatAnimation *FloatAnimationChangePhoto;
+	TFloatAnimation *FloatAnimationAddLvl;
+	TMediaPlayer *MediaPlayerMenu;
 	void __fastcall ButtonProfileClick(TObject *Sender);
 	void __fastcall TimerCheckUserLoginTimer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
@@ -91,6 +94,7 @@ __published:	// IDE-managed Components
 	void __fastcall SpeedButtonExitClick(TObject *Sender);
 	void __fastcall SpeedButtonAddLvlClick(TObject *Sender);
 	void __fastcall TimerChangePhotoTimer(TObject *Sender);
+	void __fastcall SpeedButtonAddLvlMouseEnter(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
     void __fastcall SetUserVisible(bool state);
