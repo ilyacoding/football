@@ -30,7 +30,8 @@ void __fastcall TFormAuth::ButtonLoginClick(TObject *Sender)
 	if (Udb.pid.value > - 1) {
 		string msg = "Вы были успешно авторизированы под ником " + username + ".";
 		ShowMessage(msg.c_str());
-		Udb.pid.out();
+		//Udb.pid.out();
+        FormAuth->Close();
 	} else {
 		string msg = "Пользователя с ником " + username + " не существует. Сперва нужно зарегистрироваться.";
 		ShowMessage(msg.c_str());
@@ -56,17 +57,17 @@ void __fastcall TFormAuth::ButtonRegisterClick(TObject *Sender)
 	profile.Team[0].name = "Иван";
 	profile.Team[0].surname = "Петрович";
 	profile.Team[0].level = 0;
-	profile.Team[0].speed = 2;
+	profile.Team[0].speed = 3;
 
 	profile.Team[1].name = "Артём";
 	profile.Team[1].surname = "Черных";
 	profile.Team[1].level = 0;
-	profile.Team[1].speed = 2;
+	profile.Team[1].speed = 3;
 
 	profile.Team[2].name = "Николай";
 	profile.Team[2].surname = "Победоносный";
 	profile.Team[2].level = 0;
-	profile.Team[2].speed = 2;
+	profile.Team[2].speed = 3;
 
 	if (Udb.reg(profile)) {
 		string msg = "Вы были успешно зарегистрированы под ником " + profile.name + ".";
@@ -93,8 +94,17 @@ void __fastcall TFormAuth::FormCloseQuery(TObject *Sender, bool &CanClose)
 void __fastcall TFormAuth::EditUsernameKeyDown(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
           TShiftState Shift)
 {
-	if (KeyChar == 8) {
-		ShowMessage("Good");
+	if (Key != 8) {
+		if (!isalnum(KeyChar))
+		{
+			if (KeyChar == ' ')
+			{
+				KeyChar = '_';
+				return;
+			}
+			KeyChar = 0;
+			return;
+		}
 	}
 }
 //---------------------------------------------------------------------------

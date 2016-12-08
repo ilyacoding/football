@@ -46,7 +46,7 @@
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <IncludePath>D:\BSUIR\Course\;$(IncludePath)</IncludePath>
-        <AllPackageLibs>rtl.lib;fmx.lib;IndyCore.lib;IndySystem.lib</AllPackageLibs>
+        <AllPackageLibs>rtl.lib;fmx.lib;IndyCore.lib;IndySystem.lib;OnGuardFMXDR.lib</AllPackageLibs>
         <ILINK_LibraryPath>D:\BSUIR\Course\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>FootBall</SanitizedProjectName>
         <Icns_MainIcns>$(BDS)\bin\cbuilder_PROJECTICNS.icns</Icns_MainIcns>
@@ -93,6 +93,8 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <Icon_MainIcon>FootBall_Icon1.ico</Icon_MainIcon>
+        <LinkPackageStatics>OnGuardFMXDR.lib</LinkPackageStatics>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <AppEnableHighDPI>true</AppEnableHighDPI>
@@ -104,6 +106,7 @@
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <Icon_MainIcon>FootBall_Icon2.ico</Icon_MainIcon>
         <LinkPackageStatics>rtl.lib;fmx.lib;IndyCore.lib;IndySystem.lib</LinkPackageStatics>
         <UsePackages>false</UsePackages>
         <DynamicRTL>false</DynamicRTL>

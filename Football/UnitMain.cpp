@@ -323,9 +323,9 @@ void __fastcall TFormMain::TimerCheckBallTimer(TObject *Sender)
 				ShowMessage(msg.c_str());
 				ss << 0;
 			} else {
-				string msg = "Вы ПОБЕДИЛИ! На ваш счет будет зачислено $3000.";
+				string msg = "Вы ПОБЕДИЛИ! На ваш счет будет зачислено $5000.";
 				ShowMessage(msg.c_str());
-				ss << 3000;
+				ss << 5000;
             }
 			ss.close();
 			FormMain->Close();
