@@ -69,7 +69,14 @@ void __fastcall TFormMenu::SetUserVisible(bool state)
 	ButtonAddLvl->Visible = state;
 	ButtonAdd0->Visible = state;
 	ButtonAdd1->Visible = state;
+    ButtonExit->Visible = state;
 	ButtonAdd2->Visible = state;
+	if (state) {
+		FloatAnimationPanelHeight->StopValue = 89;
+	} else {
+		FloatAnimationPanelHeight->StopValue = 0;
+	}
+	FloatAnimationPanelHeight->Start();
 }
 
 void __fastcall TFormMenu::TimerCheckUserLoginTimer(TObject *Sender)
@@ -143,27 +150,7 @@ void __fastcall TFormMenu::FormCloseQuery(TObject *Sender, bool &CanClose)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TFormMenu::ButtonGlobStatClick(TObject *Sender)
-{
-	if (Udb.pid.value == -1)
-	{
-		string msg = "Для просмотра статистики нужно зарегистрироваться.";
-		ShowMessage(msg.c_str());
-		return;
-	}
-	Udb.pid.out();
-	Udb.out();
-	Udb.in();
-	Udb.pid.in();
-	FormStat->ShowModal();
-}
-//---------------------------------------------------------------------------
 
-void __fastcall TFormMenu::ButtonInfoClick(TObject *Sender)
-{
-	FormInfo->ShowModal();
-}
-//---------------------------------------------------------------------------
 
 void __fastcall TFormMenu::ButtonAdd0Click(TObject *Sender)
 {
@@ -210,6 +197,66 @@ void __fastcall TFormMenu::ButtonExitClick(TObject *Sender)
 	Udb.pid.value = -1;
 	Udb.pid.out();
 	Udb.pid.in();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::FormResize(TObject *Sender)
+{
+	PanelPlayer0->Width = ToolBarPlayers->Width/3;
+	PanelPlayer1->Width = ToolBarPlayers->Width/3;
+	PanelPlayer2->Width = ToolBarPlayers->Width/3;
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::SpeedButtonProfileClick(TObject *Sender)
+{
+	FormAuth->ShowModal();
+	Udb.in();
+	Udb.pid.in();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::SpeedButtonAboutClick(TObject *Sender)
+{
+	FormInfo->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::SpeedButtonStatsClick(TObject *Sender)
+{
+	if (Udb.pid.value == -1)
+	{
+		string msg = "Для просмотра статистики нужно зарегистрироваться.";
+		ShowMessage(msg.c_str());
+		return;
+	}
+	Udb.pid.out();
+	Udb.out();
+	Udb.in();
+	Udb.pid.in();
+	FormStat->ShowModal();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::SpeedButtonProfileMouseEnter(TObject *Sender)
+{
+	if (!FloatAnimationMouseProfile->Running)
+		FloatAnimationMouseProfile->Start();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::SpeedButtonStatsMouseEnter(TObject *Sender)
+{
+	if (!FloatAnimationMouseStat->Running)
+		FloatAnimationMouseStat->Start();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::SpeedButtonAboutMouseEnter(TObject *Sender)
+{
+	if (!FloatAnimationMouseInfo->Running)
+		FloatAnimationMouseInfo->Start();
 }
 //---------------------------------------------------------------------------
 

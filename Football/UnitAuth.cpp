@@ -90,3 +90,12 @@ void __fastcall TFormAuth::FormCloseQuery(TObject *Sender, bool &CanClose)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TFormAuth::EditUsernameKeyDown(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
+          TShiftState Shift)
+{
+	if (KeyChar == 8) {
+		ShowMessage("Good");
+	}
+}
+//---------------------------------------------------------------------------
+

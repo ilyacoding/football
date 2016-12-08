@@ -397,6 +397,11 @@ void __fastcall TFormMain::FormShow(TObject *Sender)
 
 void __fastcall TFormMain::FormCloseQuery(TObject *Sender, bool &CanClose)
 {
+	if (Game.Winner == -1) {
+		ofstream ss("db/win.bin", std::ofstream::out | std::ofstream::trunc);
+		ss << 0;
+        ss.close();
+	}
 	DestroyField();
 }
 //---------------------------------------------------------------------------

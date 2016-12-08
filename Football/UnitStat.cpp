@@ -9,7 +9,7 @@
 #pragma resource "*.fmx"
 TFormStat *FormStat;
 TUdb Udb;
-int k = 1;
+int k;
 //---------------------------------------------------------------------------
 __fastcall TFormStat::TFormStat(TComponent* Owner)
 	: TForm(Owner)
@@ -21,7 +21,7 @@ void __fastcall TFormStat::FormShow(TObject *Sender)
 {
 	Udb.in();
 	Udb.pid.in();
-
+	k = 1;
     ListBox1->Items->Clear();
 
 	string CurrentUser = Udb.GetUser(Udb.pid.value).name;

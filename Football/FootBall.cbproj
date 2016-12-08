@@ -93,6 +93,8 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <LinkPackageImports>rtl.bpi;fmx.bpi;IndyCore.bpi;IndySystem.bpi</LinkPackageImports>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -102,7 +104,11 @@
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <LinkPackageImports>rtl.bpi;fmx.bpi;IndyCore.bpi;IndySystem.bpi</LinkPackageImports>
+        <LinkPackageStatics>rtl.lib;fmx.lib;IndyCore.lib;IndySystem.lib</LinkPackageStatics>
+        <UsePackages>false</UsePackages>
+        <DynamicRTL>false</DynamicRTL>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
     </PropertyGroup>
@@ -184,14 +190,14 @@
             <DependentOn>UnitStat.h</DependentOn>
             <BuildOrder>7</BuildOrder>
         </CppCompile>
+        <FormResources Include="UnitAuth.fmx"/>
         <FormResources Include="UnitMenu.fmx"/>
         <FormResources Include="UnitMenu.Windows.fmx"/>
         <FormResources Include="UnitMenu.Surface.fmx"/>
         <FormResources Include="UnitStat.fmx"/>
-        <FormResources Include="UnitAuth.fmx"/>
+        <FormResources Include="UnitInfo.fmx"/>
         <FormResources Include="UnitMain.fmx"/>
         <FormResources Include="UnitMain.Surface.fmx"/>
-        <FormResources Include="UnitInfo.fmx"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
