@@ -17,6 +17,11 @@
 //---------------------------------------------------------------------------
 #include "ClassTUdb.h"
 #include <FMX.Media.hpp>
+#include <IdBaseComponent.hpp>
+#include <IdComponent.hpp>
+#include <IdSNTP.hpp>
+#include <IdUDPBase.hpp>
+#include <IdUDPClient.hpp>
 //---------------------------------------------------------------------------
 class TFormMenu : public TForm
 {
@@ -76,6 +81,8 @@ __published:	// IDE-managed Components
 	TFloatAnimation *FloatAnimationChangePhoto;
 	TFloatAnimation *FloatAnimationAddLvl;
 	TMediaPlayer *MediaPlayerMenu;
+	TIdSNTP *IdSNTP1;
+	TTimer *TimerCheckLicense;
 	void __fastcall ButtonProfileClick(TObject *Sender);
 	void __fastcall TimerCheckUserLoginTimer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
@@ -95,6 +102,7 @@ __published:	// IDE-managed Components
 	void __fastcall SpeedButtonAddLvlClick(TObject *Sender);
 	void __fastcall TimerChangePhotoTimer(TObject *Sender);
 	void __fastcall SpeedButtonAddLvlMouseEnter(TObject *Sender);
+	void __fastcall TimerCheckLicenseTimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
     void __fastcall SetUserVisible(bool state);
