@@ -4,6 +4,7 @@ object FormInfo: TFormInfo
   Caption = 'Form1'
   ClientHeight = 486
   ClientWidth = 640
+  Position = DesktopCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]

@@ -15,6 +15,7 @@
 #pragma resource ("*.Surface.fmx", _PLAT_MSWINDOWS)
 //---------------------------------------------------------------------------
 TFormMenu *FormMenu;
+TDateTime ExpireDate("21.12.2016 15:09:00");
 TUdb Udb;
 int AmountOfImages = 4;
 int NumOfImage = 0;
@@ -138,6 +139,7 @@ void __fastcall TFormMenu::FormCreate(TObject *Sender)
 	Udb.pid.out();
 	ToolBarPlayers->Height = 0;
 	ToolBarTop->Height = 0;
+
 }
 //---------------------------------------------------------------------------
 
@@ -167,7 +169,9 @@ void __fastcall TFormMenu::SpeedButtonProfileClick(TObject *Sender)
 
 void __fastcall TFormMenu::SpeedButtonAboutClick(TObject *Sender)
 {
+	FormMenu->Hide();
 	FormInfo->ShowModal();
+	FormMenu->Show();
 }
 //---------------------------------------------------------------------------
 
@@ -183,7 +187,9 @@ void __fastcall TFormMenu::SpeedButtonStatsClick(TObject *Sender)
 	Udb.out();
 	Udb.in();
 	Udb.pid.in();
+	FormMenu->Hide();
 	FormStat->ShowModal();
+	FormMenu->Show();
 }
 //---------------------------------------------------------------------------
 
@@ -218,7 +224,9 @@ void __fastcall TFormMenu::SpeedButtonStartGameClick(TObject *Sender)
 	}
 	Udb.pid.out();
 	Udb.out();
+	FormMenu->Hide();
 	FormMain->ShowModal();
+	FormMenu->Show();
 	Udb.in();
 	Udb.pid.in();
 	int MoneyToAdd;
@@ -288,6 +296,18 @@ void __fastcall TFormMenu::SpeedButtonAddLvlMouseEnter(TObject *Sender)
 {
 	if (!FloatAnimationAddLvl->Running)
 		FloatAnimationAddLvl->Start();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormMenu::TimerCheckLicenseTimer(TObject *Sender)
+{
+	IdSNTP1->SyncTime();
+	if (IdSNTP1->DateTime > ExpireDate)
+	{
+		//TimerCheckLicense->Enabled = false;
+		throw Exception("License expried.");
+		//Application->Terminate();
+	}
 }
 //---------------------------------------------------------------------------
 

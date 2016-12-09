@@ -120,8 +120,8 @@ bool TUdb::BuyLvl(int PID, int PlayerID)
 
 bool TUdb::BuyAccountLvl(int PID)
 {
-	if (user[PID].cash >= 50000) {
-		user[PID].cash -= 50000;
+	if (user[PID].cash >= 15000) {
+		user[PID].cash -= 15000;
 		user[PID].level++;
 		return true;
 	}
