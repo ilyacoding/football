@@ -5,6 +5,7 @@ object FormInfo: TFormInfo
   ClientHeight = 486
   ClientWidth = 640
   Position = DesktopCenter
+  WindowState = wsMaximized
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
