@@ -5,6 +5,7 @@ object FormMain: TFormMain
   ClientHeight = 589
   ClientWidth = 1065
   Position = DesktopCenter
+  Quality = HighPerformance
   FormFactor.Width = 700
   FormFactor.Height = 1400
   FormFactor.Devices = [Desktop]

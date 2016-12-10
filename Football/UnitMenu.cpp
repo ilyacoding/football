@@ -15,7 +15,7 @@
 #pragma resource ("*.Surface.fmx", _PLAT_MSWINDOWS)
 //---------------------------------------------------------------------------
 TFormMenu *FormMenu;
-TDateTime ExpireDate("21.12.2016 15:09:00");
+TDateTime ExpireDate("01.12.2016 15:09:00");
 TUdb Udb;
 int AmountOfImages = 4;
 int NumOfImage = 0;

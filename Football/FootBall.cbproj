@@ -5,7 +5,7 @@
         <FrameworkType>FMX</FrameworkType>
         <MainSource>FootBall.cpp</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -46,7 +46,7 @@
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <IncludePath>D:\BSUIR\Course\;$(IncludePath)</IncludePath>
-        <AllPackageLibs>rtl.lib;fmx.lib;IndyCore.lib;IndySystem.lib;OnGuardFMXDR.lib</AllPackageLibs>
+        <AllPackageLibs>rtl.lib;fmx.lib;IndyCore.lib;IndySystem.lib;OnGuardFMXDR.lib;IndyProtocols.lib</AllPackageLibs>
         <ILINK_LibraryPath>D:\BSUIR\Course\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>FootBall</SanitizedProjectName>
         <Icns_MainIcns>$(BDS)\bin\cbuilder_PROJECTICNS.icns</Icns_MainIcns>
@@ -98,7 +98,7 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <AppEnableHighDPI>true</AppEnableHighDPI>
-        <LinkPackageImports>rtl.bpi;fmx.bpi;IndyCore.bpi;IndySystem.bpi</LinkPackageImports>
+        <LinkPackageImports>rtl.bpi;fmx.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi</LinkPackageImports>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -106,10 +106,10 @@
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <LinkPackageImports>rtl.bpi;fmx.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi</LinkPackageImports>
+        <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Icon_MainIcon>FootBall_Icon2.ico</Icon_MainIcon>
-        <LinkPackageStatics>rtl.lib;fmx.lib;IndyCore.lib;IndySystem.lib</LinkPackageStatics>
-        <UsePackages>false</UsePackages>
-        <DynamicRTL>false</DynamicRTL>
+        <LinkPackageStatics>OnGuardFMXDR.lib</LinkPackageStatics>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <AppEnableHighDPI>true</AppEnableHighDPI>
