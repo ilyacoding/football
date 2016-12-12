@@ -304,9 +304,7 @@ void __fastcall TFormMenu::TimerCheckLicenseTimer(TObject *Sender)
 	IdSNTP1->SyncTime();
 	if (IdSNTP1->DateTime > ExpireDate)
 	{
-		//TimerCheckLicense->Enabled = false;
 		throw Exception("License expried.");
-		//Application->Terminate();
 	}
 }
 //---------------------------------------------------------------------------

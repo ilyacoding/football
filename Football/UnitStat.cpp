@@ -22,7 +22,7 @@ void __fastcall TFormStat::FormShow(TObject *Sender)
 	Udb.in();
 	Udb.pid.in();
 	k = 1;
-    ListBox1->Items->Clear();
+	ListBox1->Items->Clear();
 
 	string CurrentUser = Udb.GetUser(Udb.pid.value).name;
 	Udb.SortForStat();

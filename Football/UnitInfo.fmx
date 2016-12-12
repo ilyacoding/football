@@ -1,7 +1,7 @@
 object FormInfo: TFormInfo
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = #1054#1073' '#1080#1075#1088#1077
   ClientHeight = 486
   ClientWidth = 640
   Position = DesktopCenter
